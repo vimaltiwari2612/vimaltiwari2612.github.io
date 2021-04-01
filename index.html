@@ -298,14 +298,29 @@
     </div>
 	
      <div id="skills" class="Games">
-        <h2 class="heading">Games</h2>
-        <ul>
-		<li><a target="_blank" href="https://vimaltiwari2612.github.io/Avengers-Memory-Game/">Avengers Memory Game</a></li>
-		<li><a target="_blank" href="https://vimaltiwari2612.github.io/BreakTheBricks/">Break The Bricks</a></li>
-		<li><a target="_blank" href="https://vimaltiwari2612.github.io/Flames/">Flames</a></li>
-        </ul>
+        <h2 class="heading">Games and Utilities</h2>
+        <ul id="dynamic-lists">
+			<script>
+				let url = 'https://api.github.com/users/vimaltiwari2612/repos';
+				var games = document.getElementById("dynamic-lists");
+				fetch(url)
+				.then(res => res.json())
+				.then((out) => {
+				  for(item in out){
+					if(out[item].homepage != null && out[item].homepage != "" && !out[item].homepage.includes("salesforce") && !out[item].homepage.includes("sfdc")){
+						out[item].name = out[item].name.replaceAll('-',' ');
+						var li = document.createElement("li");
+						li.innerHTML = '<a target="_blank" href="'+out[item].homepage+'">'+out[item].name+'</a>';
+						games.appendChild(li);
+					}
+				  }
+				})
+				.catch(err => { throw err });
+			</script>
+       </ul>
     </div>
- 
+	
+	
     <!-- End #skills -->
 
     <div id="contact">
