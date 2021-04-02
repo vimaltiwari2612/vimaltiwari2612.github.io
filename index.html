@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -66,13 +67,48 @@
 						<img style="border-radius: 50%;width: 200px;height: 200px;" src="https://avatars.githubusercontent.com/u/22127564?v=4"></img>
 					</td>
 					<td>
-						<h1>Vimal Tiwari</h1>
-						<h2>Software Engineer</h2>
+						<h1 id="name">
+						
+						</h1>
+						<h2 id="bio"></h2>
 						<a target="_blank" href="https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/vimal_tiwari/page/1" class="btn-rounded-white">View Resume</a>
 					</td>
 				</tr>
 			</table>
         </div>
+		<script>
+			let urlMain = 'https://api.github.com/users/vimaltiwari2612';
+			var wordArray = [];
+				fetch(urlMain)
+				.then(res => res.json())
+				.then((out) => {
+				  for(item in out){
+					if(item == "name"){
+						$('h1#name').text(out[item]);
+						}
+					if(item == "bio"){
+						wordArray = out[item].split('|');
+					}
+				  }
+				})
+				.catch(err => { $('h1#name').text('Vimal Tiwari'); 
+								$('h2#bio').text('Software Engineer');
+								});
+
+					var blink_speed = 1000;
+					
+					var count=0;
+					var t = setInterval(function () {
+						
+						$('h2#bio').text(wordArray[count++]);
+						
+						if(count===wordArray.length)
+						  count=0;
+					  
+					}, blink_speed);
+				
+						
+		</script>
         <!-- End #lead-content -->
 
         <div id="lead-overlay"></div>
@@ -372,8 +408,9 @@
     </footer>
     <!-- End footer -->
 
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/scripts.min.js"></script>
+	    <script src="js/scripts.min.js"></script>
 </body>
 
 </html>
