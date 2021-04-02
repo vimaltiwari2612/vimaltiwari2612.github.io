@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-
+	
 </head>
 
 <body>
@@ -210,7 +210,7 @@
     <div id="projects" class="background-alt">
         <h2 class="heading">Projects</h2>
         <div class="container">
-            <div class="row">
+            <div id="projects" class="row">
 		    
 				<div class="project shadow-large">
                     <div class="project-image">
@@ -274,6 +274,33 @@
                 </div>
 				
 				<h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
+				
+				<script>
+					let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate';
+						fetch(projURL)
+						.then(res => res.json())
+						.then((out) => {
+						  var div = '<div class="cards" > ';
+						  for(item in out){
+							if((out[item].homepage == null || out[item].homepage == "" ) && out[item].has_wiki == true){
+								out[item].name = out[item].name.replaceAll('-',' ');
+								if(out[item].description == null){
+									out[item].description = "";
+								}
+								var node = '<div class="card"><a target="_blank" href="'+out[item].html_url+'">'+out[item].name+'</a></div>';
+								div += node;
+							}
+						  }
+						  console.log(div);
+						  $('#projects .row').after(div+'</div>');	
+						})
+						.catch(err => { 
+								console.log('Error while adding dynamic projects');
+										});	
+										
+														
+				</script>
+				
             </div>
         </div>
     </div>
