@@ -30,6 +30,7 @@ SKILLS
 			<li>Data Structures</li>
 			<li>Algorithms</li>
 			<li>Design Patterns</li>
+			<li>System Design</li>
 </ul>
 
 
