@@ -6,3 +6,8 @@ Software Engineer with 5 years of experience in IT Industry.<br />
 2+ years of experience in Technical/Non-Technical Writing.<br />
 Good command over Data Structures and Algorithms.<br />
 Gate CS 2018 qualified.
+
+
+SKILLS
+
+
