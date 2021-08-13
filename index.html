@@ -198,12 +198,51 @@
 
 	<div id="education" class="certifications">
         <h2 class="heading">Certifications</h2>
-        <div class="education-block">
-             <a target="_blank" href="https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_i/page/1"><img src="images/pd1.png" /></a>
-			 <a target="_blank" href="https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_ii/page/1"><img src="images/pd2.png" />
-			 <a target="_blank" href="https://trailhead.salesforce.com/en/me/vimaltiwari" ><img src="images/ranger.png" />
-			 <a target="_blank" href="https://www.freecodecamp.org/certification/vimaltiwari2612/legacy-front-end" ><img src="images/freecodeCamp.png" />
+        <div class="certification-block">
         </div>
+            <script>
+                var master ='https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/git/trees/master';
+				
+				fetch(master)
+				.then(res => res.json())
+				.then((out) => {
+                    var tree = out['tree'];
+                    var url = null;
+                    for(var i = 0 ; i < tree.length ; i++){
+                        var item = tree[i];
+                       if(item['path'].indexOf('certification') != -1){
+                           url = item['url'];
+                           break;
+                       }
+                    }
+                   
+                    if(url != null){
+                        fetch(url)
+                        .then(res => res.json())
+                        .then((out) => {
+                            var content = atob(out['content']);
+                            var items = content.split('\n');
+                           
+                            items.forEach(item => {
+                              if(item != null && item.trim() != ''){
+                                  var con = item.split("|");
+                                  var a = '<a target="_blank" href = "'+con[1].trim()+'"> <img src="'+con[2].trim()+'" title = "'+con[0].trim()+'" width="100" height="100" /></a>';
+                                  $('.certification-block').after(a);	
+                              }
+                            });
+                        }).catch(err => { 
+                            console.log('Error while loading certifications '+err);
+                                    });
+                    }
+                 
+				})
+				.catch(err => { 
+						console.log('Error while finding certifications '+err);
+								});	
+								
+
+            </script>
+      
         <!-- End .certifications-block -->
     </div>
     <!-- End #certifications -->
