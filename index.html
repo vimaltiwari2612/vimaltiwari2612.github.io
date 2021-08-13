@@ -136,7 +136,9 @@
 				.then(res => res.json())
 				.then((out) => {
 				  var div = '<div class="col-md-8"> <p>';
-				   div += atob(out['content']);
+                   var content = atob(out['content']);
+                   var header = content.substring(0, content.indexOf('SKILLS'));
+				   div += header;
 				  $('#about .col-md-4').after(div+'</p></div>');	
 				})
 				.catch(err => { 
@@ -281,7 +283,7 @@
 						.then((out) => {
 						  var div = '<div class="cards" > ';
 						  for(item in out){
-							if((out[item].homepage == null || out[item].homepage == "" ) && out[item].has_wiki == true){
+							if(out[item].has_wiki == true){
 								out[item].name = out[item].name.replaceAll('-',' ');
 								if(out[item].description == null){
 									out[item].description = "";
@@ -304,29 +306,31 @@
     </div>
     <!-- End #projects -->
 
-    <div id="skills">
+    <div id="skills" class="skills">
         <h2 class="heading">Skills</h2>
-        <ul>
-            		<li>Java</li>
-			<li>Android</li>
-			<li>Python</li>
-			<li>SQL</li>
-			<br/>
-			<li>Html</li>
-			<li>CSS</li>
-			<li>JavaScript</li>
-			<li>Jquery</li>
-			<li>JSON</li>
-			<br/>
-			<li>Salesforce</li>
-			<li>Apex Programming</li>
-			<li>Visualforce</li>
-			<li>Lightning</li>
-			<br/>
-			<li>Data Structures</li>
-			<li>Algorithms</li>
-			<li>Design Patterns</li>
-        </ul>
+        
+        <script>
+				
+            repoURL2 = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
+            
+            fetch(repoURL2)
+            .then(res => res.json())
+            .then((out) => {
+              var div = '<div> ';
+               var content = atob(out['content']);
+               var header = content.substring(content.indexOf('SKILLS')+6);
+               div += header;
+              $('.skills .heading').after(div);	
+            })
+            .catch(err => { 
+                    console.log('Software Engineer');
+                            });	
+                            
+            
+            
+            </script>
+
+        
     </div>
     <!-- End #skills -->
    <div id="skills" class="Programming">
