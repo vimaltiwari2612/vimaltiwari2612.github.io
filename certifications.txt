@@ -1,5 +1,6 @@
-Salesforce Platform Developer 1 | https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_i/page/1 | images/pd1.png
-Salesforce Platform Developer 2 | https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_ii/page/1 | images/pd2.png"
 Trailhead Profile | https://trailhead.salesforce.com/en/me/vimaltiwari | images/ranger.png
 Free Code Camp | https://www.freecodecamp.org/certification/vimaltiwari2612/legacy-front-end | images/freecodeCamp.png
 Problem Solving (Basic) | https://www.hackerrank.com/certificates/6b56045da0ab | images/problem_solving_basic.png
+Java (Basic) | https://www.hackerrank.com/certificates/99941e9ca362 | images/java_basic.png
+Salesforce Platform Developer 1 | https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_i/page/1 | images/pd1.png
+Salesforce Platform Developer 2 | https://view.publitas.com/59530dd6-057f-4d3e-9606-45064339ffd9/salesforce_platform_developer_ii/page/1 | images/pd2.png"
