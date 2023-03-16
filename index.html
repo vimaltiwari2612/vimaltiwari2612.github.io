@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vimal Tiwari</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-	
+
 </head>
 
 <body>
@@ -34,7 +34,7 @@
             <li>
                 <a href="#education">Education</a>
             </li>
-			<li>
+            <li>
                 <a href=".certifications">Certifications</a>
             </li>
             <li>
@@ -46,10 +46,10 @@
             <li>
                 <a href=".Programming">Programming</a>
             </li>
-	     <li>
+            <li>
                 <a href=".Blogs">Digital Content & Blogs</a>
             </li>
-	    <li>
+            <li>
                 <a href=".Games">Games & Utilities</a>
             </li>
             <li>
@@ -61,54 +61,58 @@
 
     <div id="lead">
         <div id="lead-content">
-			<table>
-				<tr>
-					<td>
-						<img style="border-radius: 50%;width: 200px;height: 200px;" src="https://avatars.githubusercontent.com/u/22127564?v=4"></img>
-					</td>
-					<td>
-						<h1 id="name">
-						
-						</h1>
-						<h2 id="bio"></h2>
-						<a target="_blank" href="https://github.com/vimaltiwari2612/vimaltiwari2612.github.io/raw/master/Vimal%20Tiwari.pdf" class="btn-rounded-white">Download Resume</a>
-					</td>
-				</tr>
-			</table>
-        </div>
-		<script>
-			let urlMain = 'https://api.github.com/users/vimaltiwari2612';
-			var wordArray = [];
-				fetch(urlMain)
-				.then(res => res.json())
-				.then((out) => {
-				  for(item in out){
-					if(item == "name"){
-						$('h1#name').text(out[item]);
-						}
-					if(item == "bio"){
-						wordArray = out[item].split('|');
-					}
-				  }
-				})
-				.catch(err => { $('h1#name').text('Vimal Tiwari'); 
-								$('h2#bio').text('Software Engineer');
-								});
+            <table>
+                <tr>
+                    <td>
+                        <img style="border-radius: 50%;width: 200px;height: 200px;"
+                            src="https://avatars.githubusercontent.com/u/22127564?v=4"></img>
+                    </td>
+                    <td>
+                        <h1 id="name">
 
-					var blink_speed = 1000;
-					
-					var count=0;
-					var t = setInterval(function () {
-						
-						$('h2#bio').text(wordArray[count++]);
-						
-						if(count===wordArray.length)
-						  count=0;
-					  
-					}, blink_speed);
-				
-						
-		</script>
+                        </h1>
+                        <h2 id="bio"></h2>
+                        <a target="_blank"
+                            href="https://github.com/vimaltiwari2612/vimaltiwari2612.github.io/raw/master/Vimal%20Tiwari.pdf"
+                            class="btn-rounded-white">Download Resume</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            let urlMain = 'https://api.github.com/users/vimaltiwari2612';
+            var wordArray = [];
+            fetch(urlMain)
+                .then(res => res.json())
+                .then((out) => {
+                    for (item in out) {
+                        if (item == "name") {
+                            $('h1#name').text(out[item]);
+                        }
+                        if (item == "bio") {
+                            wordArray = out[item].split('|');
+                        }
+                    }
+                })
+                .catch(err => {
+                    $('h1#name').text('Vimal Tiwari');
+                    $('h2#bio').text('Software Engineer');
+                });
+
+            var blink_speed = 1000;
+
+            var count = 0;
+            var t = setInterval(function () {
+
+                $('h2#bio').text(wordArray[count++]);
+
+                if (count === wordArray.length)
+                    count = 0;
+
+            }, blink_speed);
+
+
+        </script>
         <!-- End #lead-content -->
 
         <div id="lead-overlay"></div>
@@ -128,26 +132,26 @@
                 <div class="col-md-4">
                     <h2 class="heading">About Me</h2>
                 </div>
-				<script>
-				
-				let repoURL = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
-				
-				fetch(repoURL)
-				.then(res => res.json())
-				.then((out) => {
-				  var div = '<div class="col-md-8"> <p>';
-                   var content = atob(out['content']);
-                   var header = content.substring(0, content.indexOf('SKILLS'));
-				   div += header;
-				  $('#about .col-md-4').after(div+'</p></div>');	
-				})
-				.catch(err => { 
-						console.log('Software Engineer');
-								});	
-								
-				
-				
-				</script>
+                <script>
+
+                    let repoURL = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
+
+                    fetch(repoURL)
+                        .then(res => res.json())
+                        .then((out) => {
+                            var div = '<div class="col-md-8"> <p>';
+                            var content = atob(out['content']);
+                            var header = content.substring(0, content.indexOf('SKILLS'));
+                            div += header;
+                            $('#about .col-md-4').after(div + '</p></div>');
+                        })
+                        .catch(err => {
+                            console.log('Software Engineer');
+                        });
+
+
+
+                </script>
             </div>
         </div>
     </div>
@@ -156,39 +160,61 @@
     <div id="experience" class="background-alt">
         <h2 class="heading">Experience</h2>
         <div id="experience-timeline">
-	    <div data-date="October 2021 – Present Day">
+
+            <div data-date="October 2021 – Present Day" id="days">
                 <h3>Google, Bengaluru(India) </h3>
                 <h4>Software Application Engineer</h4>
-		 <p>
-			Working on Google Products.
+                <p>
+                    Working on Google Products.
                 </p>
-               
             </div>
-            <div data-date="January 2019 – October 2021">
+            <div data-date="January 2019 – October 2021" id="days">
                 <h3>Q2, Bengaluru(India)</h3>
                 <h4>Senior Software Engineer</h4>
                 <p>
-					Worked as Full Stack Developer on Q2 Products.
+                    Worked as Full Stack Developer on Q2 Products.
                 </p>
             </div>
 
-            <div data-date="September 2016 – December 2018">
+            <div data-date="September 2016 – December 2018" id="days">
                 <h3>Persistent System Ltd, Nagpur(India)</h3>
                 <h4>Software Engineer</h4>
                 <p>
-					Worked as Salesforce Developer.
+                    Worked as Salesforce Developer.
                 </p>
             </div>
-			
-			 <div data-date="May 2015 – July 2015">
+
+            <div data-date="May 2015 – July 2015" id="days">
                 <h3>Samadhan WS, Indore(India)</h3>
                 <h4>Android Developer</h4>
                 <p>
-					Internship.
+                    Internship.
                 </p>
             </div>
         </div>
     </div>
+
+    <script>
+        var experience = [];
+        experience.push({ from: "Oct 18, 2021 00:00:00", to: new Date(), text: "October 2021 – Present Day <br/>(" });
+        experience.push({ from: "Jan 1, 2019 00:00:00", to: "Oct 8, 2021 00:00:00", text: "January 2019 – October 2021 <br/>(" });
+        experience.push({ from: "Sept 14, 2016 00:00:00", to: "Dec 14, 2018 00:00:00", text: "September 2016 – December 2018 <br/>(" });
+        experience.push({ from: "May 10, 2015 00:00:00", to: "July 10, 2015 00:00:00", text: "May 2015 – July 2015 <br/>(" });
+        var timeline = document.getElementById("experience-timeline").children;
+        for (counter = 0; counter < timeline.length; counter++) {
+            if (experience[counter]) {
+                let currentNode = timeline[counter];
+                var from = new Date(experience[counter].from).getTime();
+                var to = new Date(experience[counter].to).getTime();
+                console.log(from, to);
+                var timeleft = to - from;
+                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                var years = (Math.floor(days / 365));
+                var months = Math.round(Math.round(days % 365) / 31);
+                currentNode.setAttribute("data-date", experience[counter].text + years + "." + months + " Years )");
+            }
+        }
+    </script>
     <!-- End #experience -->
 
     <div id="education">
@@ -204,53 +230,53 @@
     </div>
     <!-- End #education -->
 
-	<div id="education" class="certifications">
+    <div id="education" class="certifications">
         <h2 class="heading">Certifications</h2>
         <div class="certification-block">
         </div>
-            <script>
-                var master ='https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/git/trees/master';
-				
-				fetch(master)
-				.then(res => res.json())
-				.then((out) => {
+        <script>
+            var master = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/git/trees/master';
+
+            fetch(master)
+                .then(res => res.json())
+                .then((out) => {
                     var tree = out['tree'];
                     var url = null;
-                    for(var i = 0 ; i < tree.length ; i++){
+                    for (var i = 0; i < tree.length; i++) {
                         var item = tree[i];
-                       if(item['path'].indexOf('certification') != -1){
-                           url = item['url'];
-                           break;
-                       }
+                        if (item['path'].indexOf('certification') != -1) {
+                            url = item['url'];
+                            break;
+                        }
                     }
-                   
-                    if(url != null){
-                        fetch(url)
-                        .then(res => res.json())
-                        .then((out) => {
-                            var content = atob(out['content']);
-                            var items = content.split('\n');
-                           
-                            items.forEach(item => {
-                              if(item != null && item.trim() != ''){
-                                  var con = item.split("|");
-                                  var a = '<a target="_blank" href = "'+con[1].trim()+'"> <img src="'+con[2].trim()+'" title = "'+con[0].trim()+'" width="100" height="100" /></a>';
-                                  $('.certification-block').after(a);	
-                              }
-                            });
-                        }).catch(err => { 
-                            console.log('Error while loading certifications '+err);
-                                    });
-                    }
-                 
-				})
-				.catch(err => { 
-						console.log('Error while finding certifications '+err);
-								});	
-								
 
-            </script>
-      
+                    if (url != null) {
+                        fetch(url)
+                            .then(res => res.json())
+                            .then((out) => {
+                                var content = atob(out['content']);
+                                var items = content.split('\n');
+
+                                items.forEach(item => {
+                                    if (item != null && item.trim() != '') {
+                                        var con = item.split("|");
+                                        var a = '<a target="_blank" href = "' + con[1].trim() + '"> <img src="' + con[2].trim() + '" title = "' + con[0].trim() + '" width="100" height="100" /></a>';
+                                        $('.certification-block').after(a);
+                                    }
+                                });
+                            }).catch(err => {
+                                console.log('Error while loading certifications ' + err);
+                            });
+                    }
+
+                })
+                .catch(err => {
+                    console.log('Error while finding certifications ' + err);
+                });
+
+
+        </script>
+
         <!-- End .certifications-block -->
     </div>
     <!-- End #certifications -->
@@ -259,8 +285,8 @@
         <h2 class="heading">Projects</h2>
         <div class="container">
             <div id="projects" class="row">
-		    
-				<div class="project shadow-large">
+
+                <div class="project shadow-large">
                     <div class="project-image">
                         <img src="images/covid19.png" />
                     </div>
@@ -268,13 +294,13 @@
                     <div class="project-info">
                         <h3>Covid 19 Android App</h3>
                         <p>
-							An Android App to see the statistics of Covid 19  around world.
-						</p>
+                            An Android App to see the statistics of Covid 19 around world.
+                        </p>
                         <a target="_blank" href="https://github.com/vimaltiwari2612/Covid19AndroidApp">View Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
-		    
+
                 <div class="project shadow-large">
                     <div class="project-image">
                         <img src="images/codeparser.png" />
@@ -283,9 +309,13 @@
                     <div class="project-info">
                         <h3>OOP Code Parser & UML Creator</h3>
                         <p>
-                         simple Parser which uses Compiler design concepts.  Lexical analysis symbol table formation parse the code using symbol table This code works for Java Code. It can be made for other languages too using the same concepts. Create UML diagrams with class code. Convert your code into UML direclty using this tool. It can convert any OOP based code into UML.
-			</p>
-				<a target="_blank" href="https://github.com/vimaltiwari2612/JavaCodeParserAndUMLCreator">View Project</a>
+                            simple Parser which uses Compiler design concepts. Lexical analysis symbol table formation
+                            parse the code using symbol table This code works for Java Code. It can be made for other
+                            languages too using the same concepts. Create UML diagrams with class code. Convert your
+                            code into UML direclty using this tool. It can convert any OOP based code into UML.
+                        </p>
+                        <a target="_blank" href="https://github.com/vimaltiwari2612/JavaCodeParserAndUMLCreator">View
+                            Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
@@ -299,14 +329,17 @@
                     <div class="project-info">
                         <h3>Salesforce Chrome Extension</h3>
                         <p>
-							This Salesforce Chrome extension can be used to search metadata of an object and performing soql queries. This is verison 1.0. The Development is In-Progress. It is specifically designed for chrome browser.  
-						</p>
-                        <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceChromeExtension">View Project</a>
+                            This Salesforce Chrome extension can be used to search metadata of an object and performing
+                            soql queries. This is verison 1.0. The Development is In-Progress. It is specifically
+                            designed for chrome browser.
+                        </p>
+                        <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceChromeExtension">View
+                            Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
-				
-				<div class="project shadow-large">
+
+                <div class="project shadow-large">
                     <div class="project-image">
                         <img src="images/avenger.png" />
                     </div>
@@ -314,62 +347,64 @@
                     <div class="project-info">
                         <h3>Avengers Memory Game</h3>
                         <p>
-							Simple memory game based on Vanilla JS. The idea of this game is to save the earth in a fixed time.
-						</p>
-                        <a target="_blank" href="http://vimaltiwari.coolpage.biz/Game/Avengers-Memory-Game/index.html">View Project</a>
+                            Simple memory game based on Vanilla JS. The idea of this game is to save the earth in a
+                            fixed time.
+                        </p>
+                        <a target="_blank"
+                            href="http://vimaltiwari.coolpage.biz/Game/Avengers-Memory-Game/index.html">View Project</a>
                     </div>
                     <!-- End .project-info -->
                 </div>
-				
-				<h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
-				
-				<script>
-					let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
-						fetch(projURL)
-						.then(res => res.json())
-						.then((out) => {
-                        
-						  var div = '<div class="cards" > '; 
-                          var projects = {};
 
-						  for(item in out){
-							if(out[item].has_wiki == true){
-								out[item].name = out[item].name.replaceAll('-',' ');
-								if(out[item].description == null){
-									out[item].description = "";
-								}
-                                if(projects[out[item].language] === undefined){
-                                    projects[out[item].language] = [];
+                <h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
+
+                    <script>
+                        let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
+                        fetch(projURL)
+                            .then(res => res.json())
+                            .then((out) => {
+
+                                var div = '<div class="cards" > ';
+                                var projects = {};
+
+                                for (item in out) {
+                                    if (out[item].has_wiki == true) {
+                                        out[item].name = out[item].name.replaceAll('-', ' ');
+                                        if (out[item].description == null) {
+                                            out[item].description = "";
+                                        }
+                                        if (projects[out[item].language] === undefined) {
+                                            projects[out[item].language] = [];
+                                        }
+                                        projects[out[item].language].push(out[item]);
+                                    }
                                 }
-                                projects[out[item].language].push(out[item]);
-							}
-						  }
-                          
-                          for(var key in projects){
-                              var heading = key;
-                              if(heading == "null"){
-                                  heading = "Android";
-                              }
-                              var parentDiv = '<div><h3>'+heading+'</h3>';
-                              for(var i = 0 ; i < projects[key].length ; i++){
-                                    var item =  projects[key][i];
-                                    var node = '<div class="card"><a target="_blank" href="'+item.html_url+'">'+item.name+'</a></div>';
-                                    parentDiv += node;
-                              }
-                              div += parentDiv+'</div>';
-                          }
-                          
-						  $('#projects .row').after(div+'</div>');	
-                         
-						})
-						.catch(err => { 
 
-								console.log('Error while adding dynamic projects',err);
-										});	
-										
-														
-				</script>
-				
+                                for (var key in projects) {
+                                    var heading = key;
+                                    if (heading == "null") {
+                                        heading = "Android";
+                                    }
+                                    var parentDiv = '<div><h3>' + heading + '</h3>';
+                                    for (var i = 0; i < projects[key].length; i++) {
+                                        var item = projects[key][i];
+                                        var node = '<div class="card"><a target="_blank" href="' + item.html_url + '">' + item.name + '</a></div>';
+                                        parentDiv += node;
+                                    }
+                                    div += parentDiv + '</div>';
+                                }
+
+                                $('#projects .row').after(div + '</div>');
+
+                            })
+                            .catch(err => {
+
+                                console.log('Error while adding dynamic projects', err);
+                            });
+
+
+                    </script>
+
             </div>
         </div>
     </div>
@@ -377,83 +412,86 @@
 
     <div id="skills" class="skills">
         <h2 class="heading">Skills</h2>
-        
-        <script>
-				
-            repoURL2 = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
-            
-            fetch(repoURL2)
-            .then(res => res.json())
-            .then((out) => {
-              var div = '<div> ';
-               var content = atob(out['content']);
-               var header = content.substring(content.indexOf('SKILLS')+6);
-               div += header;
-              $('.skills .heading').after(div);	
-            })
-            .catch(err => { 
-                    console.log('Software Engineer');
-                            });	
-                            
-            
-            
-            </script>
 
-        
+        <script>
+
+            repoURL2 = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
+
+            fetch(repoURL2)
+                .then(res => res.json())
+                .then((out) => {
+                    var div = '<div> ';
+                    var content = atob(out['content']);
+                    var header = content.substring(content.indexOf('SKILLS') + 6);
+                    div += header;
+                    $('.skills .heading').after(div);
+                })
+                .catch(err => {
+                    console.log('Software Engineer');
+                });
+
+
+
+        </script>
+
+
     </div>
     <!-- End #skills -->
-   <div id="skills" class="Programming">
+    <div id="skills" class="Programming">
         <h2 class="heading">Programming</h2>
         <ul>
-		<li><a target="_blank" href="https://www.hackerrank.com/vimaltiwari2612">Hacker Rank</a></li>
-		<li><a target="_blank" href="https://app.codesignal.com/profile/vimal_tiwari">Code Signal</a></li>
-		<br/>
-		<li><a target="_blank" href="https://trailblazer.me/id?uid=vimaltiwari&cmty=trailhead">Salesforce Trailhead</a></li>
-		<br/>
-		<li><a target="_blank" href="https://github.com/vimaltiwari2612/Programming">Coding Questions for Interviews</a></li>
-		
+            <li><a target="_blank" href="https://www.hackerrank.com/vimaltiwari2612">Hacker Rank</a></li>
+            <li><a target="_blank" href="https://app.codesignal.com/profile/vimal_tiwari">Code Signal</a></li>
+            <br />
+            <li><a target="_blank" href="https://trailblazer.me/id?uid=vimaltiwari&cmty=trailhead">Salesforce
+                    Trailhead</a></li>
+            <br />
+            <li><a target="_blank" href="https://github.com/vimaltiwari2612/Programming">Coding Questions for
+                    Interviews</a></li>
+
         </ul>
     </div>
-				 
-   <div id="skills" class="Blogs">
+
+    <div id="skills" class="Blogs">
         <h2 class="heading">Digital Content & Blogs</h2>
         <ul>
-		<li><a target="_blank" href="https://medium.com/elevate-salesforce">Elevate Your System Design and Salesforce Knowledge
-</a></li>
-		<br/>
-		<li><a target="_blank" href="https://github.com/vimaltiwari2612/SystemDesign">System Design</a></li>
-		<li><a target="_blank" href="https://medium.com/elevate-java">Elevate Your Java Knowledge</a></li>
-		<br/>
-		<li><a target="_blank" href="https://www.quora.com/profile/Vimal-Tiwari-4">Quora</a></li>
-		<li><a target="_blank" href="https://www.instagram.com/thesoulfulwriteups">The Soulful Writeups</a></li>
-		
+            <li><a target="_blank" href="https://medium.com/elevate-salesforce">Elevate Your System Design and
+                    Salesforce Knowledge
+                </a></li>
+            <br />
+            <li><a target="_blank" href="https://github.com/vimaltiwari2612/SystemDesign">System Design</a></li>
+            <li><a target="_blank" href="https://medium.com/elevate-java">Elevate Your Java Knowledge</a></li>
+            <br />
+            <li><a target="_blank" href="https://www.quora.com/profile/Vimal-Tiwari-4">Quora</a></li>
+            <li><a target="_blank" href="https://www.instagram.com/thesoulfulwriteups">The Soulful Writeups</a></li>
+
         </ul>
     </div>
-	
-     <div id="skills" class="Games">
+
+    <div id="skills" class="Games">
         <h2 class="heading">Games and Utilities</h2>
         <ul id="dynamic-lists">
-			<script>
-				let url = 'https://api.github.com/users/vimaltiwari2612/repos?per_page=100';
-				var games = document.getElementById("dynamic-lists");
-				fetch(url)
-				.then(res => res.json())
-				.then((out) => {
-				  for(item in out){
-					if(out[item].homepage != null && out[item].homepage != "" && !out[item].homepage.includes("salesforce") && !out[item].homepage.includes("sfdc")){
-						out[item].name = out[item].name.replaceAll('-',' ');
-						var li = document.createElement("li");
-						li.innerHTML = '<a target="_blank" href="'+out[item].homepage+'">'+out[item].name+'</a>';
-						games.appendChild(li);
-					}
-				  }
-				})
-				.catch(err => { throw err });
-			</script>
-       </ul>
+            <script>
+                let url = 'https://api.github.com/users/vimaltiwari2612/repos?per_page=100';
+                var games = document.getElementById("dynamic-lists");
+                fetch(url)
+                    .then(res => res.json())
+                    .then((out) => {
+                        for (item in out) {
+                            if (out[item].homepage != null && out[item].homepage != "" && !out[item].homepage.includes("salesforce") && !out[item].homepage.includes("sfdc")) {
+                                out[item].name = out[item].name.replaceAll('-', ' ');
+                                var li = document.createElement("li");
+                                li.innerHTML = '<a target="_blank" href="' + out[item].homepage + '">' + out[item].name + '</a>';
+                                games.appendChild(li);
+                            }
+                        }
+                    })
+                    .catch(err => { throw err });
+            </script>
+        </ul>
     </div>
-	
-	
+
+
     <!-- End #skills -->
 
     <div id="contact">
@@ -476,26 +514,32 @@
                 <div class="social">
                     <ul>
                         <li>
-                            <a href="https://github.com/vimaltiwari2612" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                            <a href="https://github.com/vimaltiwari2612" target="_blank"><i class="fa fa-github"
+                                    aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/vimaltiwari2612/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com/in/vimaltiwari2612/" target="_blank"><i
+                                    class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/_vimaltiwari/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/_vimaltiwari/" target="_blank"><i class="fa fa-instagram"
+                                    aria-hidden="true"></i></a>
                         </li>
-						<li>
-                            <a href="https://www.facebook.com/vimaltiwari2612/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <li>
+                            <a href="https://www.facebook.com/vimaltiwari2612/" target="_blank"><i
+                                    class="fa fa-facebook" aria-hidden="true"></i></a>
                         </li>
-					    <li>
-                            <a href="https://medium.com/@vimaltiwari2612" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                        <li>
+                            <a href="https://medium.com/@vimaltiwari2612" target="_blank"><i class="fa fa-medium"
+                                    aria-hidden="true"></i></a>
                         </li>
-						<li>
-                            <a href="skype:vimaltiwari2612_1?call" target="_blank"><i class="fa fa-skype" aria-hidden="true"></i></a>
+                        <li>
+                            <a href="skype:vimaltiwari2612_1?call" target="_blank"><i class="fa fa-skype"
+                                    aria-hidden="true"></i></a>
                         </li>
                     </ul>
                 </div>
-				<div class="top">
+                <div class="top">
                     <span id="to-top">
                         <i class="fa fa-chevron-up" aria-hidden="true"></i>
                     </span>
@@ -505,9 +549,9 @@
     </footer>
     <!-- End footer -->
 
-	
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	    <script src="js/scripts.min.js"></script>
+    <script src="js/scripts.min.js"></script>
 </body>
 
 </html>
