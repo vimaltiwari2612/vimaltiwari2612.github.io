@@ -12,7 +12,39 @@
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <style>
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
 
+        .button:hover {
+            background-color: #e2f76d
+        }
+
+        .button:active {
+            background-color: #e2f76d;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+        .topmate {
+            background-color: rgb(234, 97, 97);
+        }
+
+        .preplaced {
+            background-color: rgb(121, 241, 121)
+        }
+    </style>
 </head>
 
 <body>
@@ -496,6 +528,12 @@
 
     <div id="contact">
         <h2>Get in Touch</h2>
+        <a href="https://topmate.io/vimaltiwari" target="_blank" class="button topmate">topmate</a>
+        <a href="https://www.preplaced.in/profile/vimal-tiwari" target="_blank" class="button preplaced">PrePlaced</a>
+        <div id="web-profiles">
+
+            </br>
+        </div>
         <div id="contact-form">
             <form method="POST" action="https://formspree.io/vimaltiwari2612@gmail.com">
                 <input type="hidden" name="_subject" value="Contact request from vimaltiwari2612.github.io" />
