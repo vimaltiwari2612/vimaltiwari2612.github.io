@@ -1,5 +1,5 @@
-Software Engineer with 7+ years of experience in Software Industry.<br />
-7+ years of experience in Salesforce Application Development (Apex | Lightning | LWC | 2x Ranger TrailHead).<br />
+Software Engineer with CURRENT_YEAR+ years of experience in Software Industry.<br />
+CURRENT_YEAR+ years of experience in Salesforce Application Development (Apex | Lightning | LWC | 2x Ranger TrailHead).<br />
 2x certified Salesforce (Platform Developer 1 & 2).<br />
 2+ years of experience in Java & Android development.<br />
 2+ years of experience in web development (jquery, Bootstrap, JavaScript, React, Node).<br />
