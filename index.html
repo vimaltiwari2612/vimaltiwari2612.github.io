@@ -175,6 +175,9 @@
                             var content = atob(out['content']);
                             var header = content.substring(0, content.indexOf('SKILLS'));
                             div += header;
+                            const d = new Date();
+                            let year = d.getFullYear();
+                            div = div.replaceAll('CURRENT_YEAR', year - 2016);
                             $('#about .col-md-4').after(div + '</p></div>');
                         })
                         .catch(err => {
