@@ -44,6 +44,66 @@
         .preplaced {
             background-color: rgb(121, 241, 121)
         }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: black;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -51,6 +111,7 @@
     <div id="mobile-menu-open" class="shadow-large">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
+
     <!-- End #mobile-menu-toggle -->
     <header>
         <div id="mobile-menu-close">
@@ -87,11 +148,19 @@
             <li>
                 <a href="#contact">Contact</a>
             </li>
+            <li>
+                <label class="switch">
+                    <input type="checkbox" onclick="toggleMode(this);">
+                    <span class="slider round"></span>
+                </label>
+            </li>
+
         </ul>
     </header>
     <!-- End header -->
 
     <div id="lead">
+
         <div id="lead-content">
             <table>
                 <tr>
@@ -111,12 +180,14 @@
                 </tr>
             </table>
         </div>
+
         <script>
             let urlMain = 'https://api.github.com/users/vimaltiwari2612';
             var wordArray = [];
             fetch(urlMain)
                 .then(res => res.json())
                 .then((out) => {
+
                     for (item in out) {
                         if (item == "name") {
                             $('h1#name').text(out[item]);
@@ -124,9 +195,14 @@
                         if (item == "bio") {
                             wordArray = out[item].split('|');
                         }
+                        if (item == "message" && out[item].includes('API rate limit exceeded')) {
+                            $('h1#name').text('Vimal Tiwari');
+                            $('h2#bio').text('Software Engineer');
+                        }
                     }
                 })
                 .catch(err => {
+
                     $('h1#name').text('Vimal Tiwari');
                     $('h2#bio').text('Software Engineer');
                 });
@@ -167,12 +243,12 @@
                 <script>
 
                     let repoURL = 'https://api.github.com/repos/vimaltiwari2612/vimaltiwari2612.github.io/readme';
-
+                    var div = '<div class="col-md-8"> <p>';
                     fetch(repoURL)
                         .then(res => res.json())
                         .then((out) => {
-                            var div = '<div class="col-md-8"> <p>';
                             var content = atob(out['content']);
+
                             var header = content.substring(0, content.indexOf('SKILLS'));
                             div += header;
                             const d = new Date();
@@ -181,7 +257,8 @@
                             $('#about .col-md-4').after(div + '</p></div>');
                         })
                         .catch(err => {
-                            console.log('Software Engineer');
+                            div += 'Software Engineer';
+                            $('#about .col-md-4').after(div + '</p></div>');
                         });
 
 
@@ -241,7 +318,6 @@
                 let currentNode = timeline[counter];
                 var from = new Date(experience[counter].from).getTime();
                 var to = new Date(experience[counter].to).getTime();
-                console.log(from, to);
                 var timeleft = to - from;
                 var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
                 var years = (Math.floor(days / 365));
@@ -307,6 +383,7 @@
                 })
                 .catch(err => {
                     console.log('Error while finding certifications ' + err);
+                    $('.certification-block').after('<div>Loading...</div>');
                 });
 
 
@@ -391,7 +468,11 @@
                     <!-- End .project-info -->
                 </div>
 
+
                 <h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
+
+                    <canvas id="chartId" aria-label="chart" style="display: inline"></canvas>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
 
                     <script>
                         let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
@@ -414,12 +495,18 @@
                                         projects[out[item].language].push(out[item]);
                                     }
                                 }
-
+                                let technologiesArray = [];
+                                let technologiesProjectCount = [];
+                                let technologiesColor = [];
                                 for (var key in projects) {
                                     var heading = key;
                                     if (heading == "null") {
                                         heading = "Android";
                                     }
+                                    technologiesArray.push(heading);
+                                    technologiesProjectCount.push(projects[key].length);
+                                    technologiesColor.push("#"+(((1+Math.random())*(1<<24)|0).toString(16)).substr(-6));
+                                    console.log(technologiesArray, technologiesColor, technologiesProjectCount);
                                     var parentDiv = '<div><h3>' + heading + '</h3>';
                                     for (var i = 0; i < projects[key].length; i++) {
                                         var item = projects[key][i];
@@ -430,6 +517,22 @@
                                 }
 
                                 $('#projects .row').after(div + '</div>');
+                                var chrt = document.getElementById("chartId").getContext("2d");
+                                var chartId = new Chart(chrt, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: technologiesArray,
+                                        datasets: [{
+                                            label: "Tech Proficiency",
+                                            data: technologiesProjectCount,
+                                            backgroundColor: technologiesColor,
+                                            hoverOffset: 5
+                                        }],
+                                    },
+                                    options: {
+                                        responsive: false,
+                                    },
+                                });
 
                             })
                             .catch(err => {
@@ -441,7 +544,9 @@
                     </script>
 
             </div>
+
         </div>
+
     </div>
     <!-- End #projects -->
 
@@ -462,7 +567,8 @@
                     $('.skills .heading').after(div);
                 })
                 .catch(err => {
-                    console.log('Software Engineer');
+                    div = err;
+                    $('.skills .heading').after('<div>Loading...</div>');
                 });
 
 
@@ -514,6 +620,11 @@
                     .then(res => res.json())
                     .then((out) => {
                         for (item in out) {
+                            if (item == 'message' && out[item].includes('API rate limit exceeded')) {
+                                var div = document.createElement("div");
+                                div.innerHTML = 'Loading...';
+                                games.appendChild(div);
+                            }
                             if (out[item].homepage != null && out[item].homepage != "" && !out[item].homepage.includes("salesforce") && !out[item].homepage.includes("sfdc")) {
                                 out[item].name = out[item].name.replaceAll('-', ' ');
                                 var li = document.createElement("li");
@@ -522,7 +633,11 @@
                             }
                         }
                     })
-                    .catch(err => { throw err });
+                    .catch(err => {
+                        var div = document.createElement("div");
+                        div += 'Loading...';
+                        games.appendChild(div);
+                    });
             </script>
         </ul>
     </div>
@@ -594,6 +709,20 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/scripts.min.js"></script>
+    <script>
+        function toggleMode(value) {
+            let tags = ['div', 'h1', 'h2', 'h3', 'h4', 'p', 'span', 'ul', 'footer'];
+            tags.forEach(tag => {
+                let divs = document.getElementsByTagName(tag);
+                for (index in divs) {
+                    if (index && divs[index] && divs[index].style) {
+                        divs[index].style.background = (value.checked) ? 'black' : divs[index].style = '';
+                        divs[index].style.color = (value.checked) ? 'white' : divs[index].style = '';
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
