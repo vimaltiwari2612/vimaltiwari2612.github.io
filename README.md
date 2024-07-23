@@ -22,20 +22,16 @@ SKILLS
 			<li>React</li>
 			<li>Node</li>
 			<li>jQuery</li>
-			<li>JSON</li>
 			<br/>
 			<li>Salesforce</li>
 			<li>Apex Programming</li>
-			<li>Visualforce</li>
-			<li>Lightning</li>
+			<li>Lightning Web Components</li>
 			<br/>
 			<li>Data Structures</li>
 			<li>Algorithms</li>
-			<li>Design Patterns</li>
 			<li>System Design</li>
 			<br/>
 			<li>Blogging</li>
-			<li>Content Writing</li>
 			<li>Digital Content Creation</li>
 			
 </ul>
