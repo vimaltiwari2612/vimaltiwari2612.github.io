@@ -13,6 +13,32 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <style>
+        .accordion {
+            background-color: #b6f1ec;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: lightyellow;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
         .button {
             display: inline-block;
             padding: 15px 25px;
@@ -105,6 +131,22 @@
             border-radius: 50%;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+    <script>
+        //global vars
+        const LOADING = 'Loading...';
+        const API_EXCEPTION = 'API rate limit exceeded';
+
+        handleProjectAccordian = (elem) => {
+            elem.classList.toggle("active");
+            var panel = elem.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -195,7 +237,7 @@
                         if (item == "bio") {
                             wordArray = out[item].split('|');
                         }
-                        if (item == "message" && out[item].includes('API rate limit exceeded')) {
+                        if (item == "message" && out[item].includes(API_EXCEPTION)) {
                             $('h1#name').text('Vimal Tiwari');
                             $('h2#bio').text('Software Engineer');
                         }
@@ -257,7 +299,7 @@
                             $('#about .col-md-4').after(div + '</p></div>');
                         })
                         .catch(err => {
-                            div += 'Software Engineer';
+                            div = 'Software Engineer';
                             $('#about .col-md-4').after(div + '</p></div>');
                         });
 
@@ -273,32 +315,40 @@
         <h2 class="heading">Experience</h2>
         <div id="experience-timeline">
 
-            <div data-date="October 2021 – Present Day" id="days">
+            <div data-date="October 2021 – Present Day" id="days" style="
+            background-color: lightgreen;
+        ">
                 <h3>Google, Bengaluru(India) </h3>
-                <h4>Software Application Engineer</h4>
+                <h4 style="color: cornflowerblue;">Software Application Engineer</h4>
                 <p>
                     Working on Google Products.
                 </p>
             </div>
-            <div data-date="January 2019 – October 2021" id="days">
+            <div data-date="January 2019 – October 2021" id="days" style="
+            background-color: antiquewhite;
+        ">
                 <h3>Q2, Bengaluru(India)</h3>
-                <h4>Senior Software Engineer</h4>
+                <h4 style="color: cornflowerblue;">Senior Software Engineer</h4>
                 <p>
                     Worked as Full Stack Developer on Q2 Products.
                 </p>
             </div>
 
-            <div data-date="September 2016 – December 2018" id="days">
+            <div data-date="September 2016 – December 2018" id="days" style="
+            background-color: antiquewhite;
+        ">
                 <h3>Persistent System Ltd, Nagpur(India)</h3>
-                <h4>Software Engineer</h4>
+                <h4 style="color: cornflowerblue;">Software Engineer</h4>
                 <p>
                     Worked as Salesforce Developer.
                 </p>
             </div>
 
-            <div data-date="May 2015 – July 2015" id="days">
+            <div data-date="May 2015 – July 2015" id="days" style="
+            background-color: antiquewhite;
+        ">
                 <h3>Samadhan WS, Indore(India)</h3>
-                <h4>Android Developer</h4>
+                <h4 style="color: cornflowerblue;">Android Developer</h4>
                 <p>
                     Internship.
                 </p>
@@ -328,7 +378,9 @@
     </script>
     <!-- End #experience -->
 
-    <div id="education">
+    <div id="education" style="
+    background-color: azure;
+">
         <h2 class="heading">Education</h2>
         <div class="education-block">
             <h3>Shri Govindram Seksaria Institute of Technology and Science, Indore(India)</h3>
@@ -383,7 +435,7 @@
                 })
                 .catch(err => {
                     console.log('Error while finding certifications ' + err);
-                    $('.certification-block').after('<div>Loading...</div>');
+                    $('.certification-block').after('<div>' + LOADING + '</div>');
                 });
 
 
@@ -472,71 +524,74 @@
                 <h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
 
                     <canvas id="chartId" aria-label="chart" style="display: inline"></canvas>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
-
                     <script>
                         let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
                         fetch(projURL)
                             .then(res => res.json())
                             .then((out) => {
+                                if (out && out.message && out.message.includes(API_EXCEPTION)) {
+                                    document.getElementById("chartId").style.display = 'none';
+                                    $('#projects .row').after('<div>' + LOADING + '</div>');
+                                } else {
+                                    var div = '<div class="cards"> ';
+                                    var projects = {};
 
-                                var div = '<div class="cards" > ';
-                                var projects = {};
-
-                                for (item in out) {
-                                    if (out[item].has_wiki == true) {
-                                        out[item].name = out[item].name.replaceAll('-', ' ');
-                                        if (out[item].description == null) {
-                                            out[item].description = "";
+                                    for (item in out) {
+                                        if (out[item].has_wiki == true) {
+                                            out[item].name = out[item].name.replaceAll('-', ' ');
+                                            if (out[item].description == null) {
+                                                out[item].description = "";
+                                            }
+                                            if (projects[out[item].language] === undefined) {
+                                                projects[out[item].language] = [];
+                                            }
+                                            projects[out[item].language].push(out[item]);
                                         }
-                                        if (projects[out[item].language] === undefined) {
-                                            projects[out[item].language] = [];
+                                    }
+                                    let technologiesArray = [];
+                                    let technologiesProjectCount = [];
+                                    let technologiesColor = [];
+                                    for (var key in projects) {
+                                        var heading = key;
+                                        if (heading == "null") {
+                                            heading = "Android";
                                         }
-                                        projects[out[item].language].push(out[item]);
+                                        technologiesArray.push(heading);
+                                        technologiesProjectCount.push(projects[key].length);
+                                        let color = "#" + (((1 + Math.random()) * (1 << 24) | 0).toString(16)).substr(-6);
+                                        technologiesColor.push(color);
+                                        var parentDiv = '<div><button class="accordion" style="background-color:' + color + '; color : white;" onclick="handleProjectAccordian(this)">' + heading + '</button><div class="panel">';
+                                        for (var i = 0; i < projects[key].length; i++) {
+                                            var item = projects[key][i];
+                                            var node = '<div class="card"><a target="_blank" href="' + item.html_url + '">' + item.name + '</a></div>';
+                                            parentDiv += node;
+                                        }
+                                        div += parentDiv + '</div></div>';
                                     }
-                                }
-                                let technologiesArray = [];
-                                let technologiesProjectCount = [];
-                                let technologiesColor = [];
-                                for (var key in projects) {
-                                    var heading = key;
-                                    if (heading == "null") {
-                                        heading = "Android";
-                                    }
-                                    technologiesArray.push(heading);
-                                    technologiesProjectCount.push(projects[key].length);
-                                    technologiesColor.push("#"+(((1+Math.random())*(1<<24)|0).toString(16)).substr(-6));
-                                    console.log(technologiesArray, technologiesColor, technologiesProjectCount);
-                                    var parentDiv = '<div><h3>' + heading + '</h3>';
-                                    for (var i = 0; i < projects[key].length; i++) {
-                                        var item = projects[key][i];
-                                        var node = '<div class="card"><a target="_blank" href="' + item.html_url + '">' + item.name + '</a></div>';
-                                        parentDiv += node;
-                                    }
-                                    div += parentDiv + '</div>';
-                                }
 
-                                $('#projects .row').after(div + '</div>');
-                                var chrt = document.getElementById("chartId").getContext("2d");
-                                var chartId = new Chart(chrt, {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: technologiesArray,
-                                        datasets: [{
-                                            label: "Tech Proficiency",
-                                            data: technologiesProjectCount,
-                                            backgroundColor: technologiesColor,
-                                            hoverOffset: 5
-                                        }],
-                                    },
-                                    options: {
-                                        responsive: false,
-                                    },
-                                });
+                                    $('#projects .row').after(div + '</div>');
+                                    var chrt = document.getElementById("chartId").getContext("2d");
+                                    var chartId = new Chart(chrt, {
+                                        type: 'doughnut',
+                                        data: {
+                                            labels: technologiesArray,
+                                            datasets: [{
+                                                label: "Tech Proficiency",
+                                                data: technologiesProjectCount,
+                                                backgroundColor: technologiesColor,
+                                                hoverOffset: 5
+                                            }],
+                                        },
+                                        options: {
+                                            responsive: false,
+                                        },
+                                    });
 
+                                }
                             })
                             .catch(err => {
-
+                                document.getElementById("chartId").style.display = 'none';
+                                $('#projects .row').after('<div>' + LOADING + '</div>');
                                 console.log('Error while adding dynamic projects', err);
                             });
 
@@ -568,7 +623,7 @@
                 })
                 .catch(err => {
                     div = err;
-                    $('.skills .heading').after('<div>Loading...</div>');
+                    $('.skills .heading').after('<div>' + LOADING + '</div>');
                 });
 
 
@@ -584,7 +639,7 @@
             <li><a target="_blank" href="https://www.hackerrank.com/vimaltiwari2612">Hacker Rank</a></li>
             <li><a target="_blank" href="https://app.codesignal.com/profile/vimal_tiwari">Code Signal</a></li>
             <br />
-            <li><a target="_blank" href="https://trailblazer.me/id?uid=vimaltiwari&cmty=trailhead">Salesforce
+            <li><a target="_blank" href="https://www.salesforce.com/trailblazer/vimaltiwari">Salesforce
                     Trailhead</a></li>
             <br />
             <li><a target="_blank" href="https://github.com/vimaltiwari2612/Programming">Coding Questions for
@@ -604,7 +659,7 @@
             <li><a target="_blank" href="https://medium.com/elevate-java">Elevate Your Java Knowledge</a></li>
             <br />
             <li><a target="_blank" href="https://www.quora.com/profile/Vimal-Tiwari-4">Quora</a></li>
-            <li><a target="_blank" href="https://www.youtube.com/@Vimal_reels/videos">Youtube</a></li>
+            <li><a target="_blank" href="https://www.youtube.com/@vimal_creator/videos">Youtube</a></li>
             <br />
             <li><a target="_blank" href="https://www.instagram.com/thesoulfulwriteups">The Soulful Writeups</a></li>
         </ul>
@@ -620,9 +675,9 @@
                     .then(res => res.json())
                     .then((out) => {
                         for (item in out) {
-                            if (item == 'message' && out[item].includes('API rate limit exceeded')) {
+                            if (item == 'message' && out[item].includes(API_EXCEPTION)) {
                                 var div = document.createElement("div");
-                                div.innerHTML = 'Loading...';
+                                div.innerHTML = '' + LOADING + '';
                                 games.appendChild(div);
                             }
                             if (out[item].homepage != null && out[item].homepage != "" && !out[item].homepage.includes("salesforce") && !out[item].homepage.includes("sfdc")) {
@@ -635,7 +690,7 @@
                     })
                     .catch(err => {
                         var div = document.createElement("div");
-                        div += 'Loading...';
+                        div += '' + LOADING + '';
                         games.appendChild(div);
                     });
             </script>
@@ -648,9 +703,7 @@
     <div id="contact">
         <h2>Get in Touch</h2>
         <a href="https://topmate.io/vimaltiwari" target="_blank" class="button topmate">topmate</a>
-        <a href="https://www.preplaced.in/profile/vimal-tiwari" target="_blank" class="button preplaced">PrePlaced</a>
         <div id="web-profiles">
-
             </br>
         </div>
         <div id="contact-form">
