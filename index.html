@@ -521,83 +521,85 @@
                 </div>
 
 
-                <h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h2>
+                <h3><a target="_blank" href="https://github.com/vimaltiwari2612">More Projects</a></h3>
 
-                    <canvas id="chartId" aria-label="chart" style="display: inline"></canvas>
-                    <script>
-                        let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
-                        fetch(projURL)
-                            .then(res => res.json())
-                            .then((out) => {
-                                if (out && out.message && out.message.includes(API_EXCEPTION)) {
-                                    document.getElementById("chartId").style.display = 'none';
-                                    $('#projects .row').after('<div>' + LOADING + '</div>');
-                                } else {
-                                    var div = '<div class="cards"> ';
-                                    var projects = {};
-
-                                    for (item in out) {
-                                        if (out[item].has_wiki == true) {
-                                            out[item].name = out[item].name.replaceAll('-', ' ');
-                                            if (out[item].description == null) {
-                                                out[item].description = "";
-                                            }
-                                            if (projects[out[item].language] === undefined) {
-                                                projects[out[item].language] = [];
-                                            }
-                                            projects[out[item].language].push(out[item]);
-                                        }
-                                    }
-                                    let technologiesArray = [];
-                                    let technologiesProjectCount = [];
-                                    let technologiesColor = [];
-                                    for (var key in projects) {
-                                        var heading = key;
-                                        if (heading == "null") {
-                                            heading = "Android";
-                                        }
-                                        technologiesArray.push(heading);
-                                        technologiesProjectCount.push(projects[key].length);
-                                        let color = "#" + (((1 + Math.random()) * (1 << 24) | 0).toString(16)).substr(-6);
-                                        technologiesColor.push(color);
-                                        var parentDiv = '<div><button class="accordion" style="background-color:' + color + '; color : white;" onclick="handleProjectAccordian(this)">' + heading + '</button><div class="panel">';
-                                        for (var i = 0; i < projects[key].length; i++) {
-                                            var item = projects[key][i];
-                                            var node = '<div class="card"><a target="_blank" href="' + item.html_url + '">' + item.name + '</a></div>';
-                                            parentDiv += node;
-                                        }
-                                        div += parentDiv + '</div></div>';
-                                    }
-
-                                    $('#projects .row').after(div + '</div>');
-                                    var chrt = document.getElementById("chartId").getContext("2d");
-                                    var chartId = new Chart(chrt, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: technologiesArray,
-                                            datasets: [{
-                                                label: "Tech Proficiency",
-                                                data: technologiesProjectCount,
-                                                backgroundColor: technologiesColor,
-                                                hoverOffset: 5
-                                            }],
-                                        },
-                                        options: {
-                                            responsive: false,
-                                        },
-                                    });
-
-                                }
-                            })
-                            .catch(err => {
+                <canvas id="chartId" aria-label="chart" style="display: inline"></canvas>
+                <script>
+                    let projURL = 'https://api.github.com/users/vimaltiwari2612/repos?sort=createdDate&per_page=100';
+                    fetch(projURL)
+                        .then(res => res.json())
+                        .then((out) => {
+                            if (out && out.message && out.message.includes(API_EXCEPTION)) {
                                 document.getElementById("chartId").style.display = 'none';
                                 $('#projects .row').after('<div>' + LOADING + '</div>');
-                                console.log('Error while adding dynamic projects', err);
-                            });
+                            } else {
+                                var div = '<div class="cards"> ';
+                                var projects = {};
+
+                                for (item in out) {
+                                    if (out[item].has_wiki == true) {
+                                        out[item].name = out[item].name.replaceAll('-', ' ');
+                                        if (out[item].description == null) {
+                                            out[item].description = "";
+                                        }
+                                        if (projects[out[item].language] === undefined) {
+                                            projects[out[item].language] = [];
+                                        }
+                                        projects[out[item].language].push(out[item]);
+                                    }
+                                }
+                                let technologiesArray = [];
+                                let technologiesProjectCount = [];
+                                let technologiesColor = [];
+                                for (var key in projects) {
+                                    var heading = key;
+                                    if (heading == "null") {
+                                        heading = "Android";
+                                    }
+                                    technologiesArray.push(heading);
+                                    technologiesProjectCount.push(projects[key].length);
+                                    let color = "#" + (((1 + Math.random()) * (1 << 24) | 0).toString(16)).substr(-6);
+                                    technologiesColor.push(color);
+                                    var parentDiv = '<div><button class="accordion" style="background-color:' + color + '; color : white;" onclick="handleProjectAccordian(this)">' + heading + '</button><div class="panel">';
+                                    for (var i = 0; i < projects[key].length; i++) {
+                                        var item = projects[key][i];
+                                        var node = '<div class="card"><a target="_blank" href="' + item.html_url + '">' + item.name + '</a></div>';
+                                        parentDiv += node;
+                                    }
+                                    div += parentDiv + '</div></div>';
+                                }
+
+                                $('#projects .row').after(div + '</div>');
+                                var chrt = document.getElementById("chartId").getContext("2d");
+                                var chartId = new Chart(chrt, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: technologiesArray,
+                                        datasets: [{
+                                            label: "Tech Proficiency",
+                                            data: technologiesProjectCount,
+                                            backgroundColor: technologiesColor,
+                                            hoverOffset: 5
+                                        }],
+                                    },
+                                    options: {
+                                        responsive: false,
+                                    },
+                                });
+
+                            }
+                        })
+                        .catch(err => {
+                            document.getElementById("chartId").style.display = 'none';
+                            $('#projects .row').after('<div>' + LOADING + '</div>');
+                            console.log('Error while adding dynamic projects', err);
+                        });
 
 
-                    </script>
-
+                </script>
+                <br />
+                <strong>(Click Tiles to explore...)</strong>
+                <i class="fa fa-hand-o-down" style="font-size:36px"></i>
             </div>
 
         </div>
