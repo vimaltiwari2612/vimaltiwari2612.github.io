@@ -1,0 +1,486 @@
+/* Custom Styles for a Classy, Trendy, and FULLY GAMIFIED Look (Final Version) */
+
+:root {
+    --primary-color: #3f51b5; /* Indigo/Blue (Primary UI Color) */
+    --secondary-color: #ff4081; /* Pink accent (Highlight/Alert) */
+    --bg-light: #f8f9fa;
+    --bg-dark: #212529;
+    --text-color: #333; /* Default text color (dark) */
+    
+    /* Gamified Colors & Effects */
+    --game-ui-background: rgba(30, 30, 30, 0.95);
+    --game-ui-text: #ccf;
+    --current-color: #28a745; /* Current Quest/Active Status (Green) */
+    --past-color: #fd7e14;    /* Completed Quest/Archive (Orange) */
+    --glow-primary: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+    --glow-secondary: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+    --light-font: #f1f1f1; /* Explicit light color for dark backgrounds */
+}
+
+/* 1. Global & Typography */
+body {
+    font-family: 'Lato', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    transition: background-color 0.3s, color 0.3s;
+    /* Ensure no residual body margin/padding */
+    padding-top: 0 !important; 
+    margin-top: 0 !important;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+}
+
+.heading {
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--secondary-color); 
+    text-shadow: 2px 2px var(--primary-color);
+}
+
+/* Fix for Fixed Navbar Obscuring Content when scrolling to sections */
+section {
+    padding-top: 100px; /* Push content down below the fixed navbar */
+    padding-bottom: 50px; /* Reduce default vertical spacing */
+}
+/* Ensure ABOUT section follows the new padding rules */
+#about {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+/* 2. Navbar Styling */
+#main-nav {
+    background-color: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(5px);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+#main-nav .navbar-brand {
+    color: var(--primary-color);
+}
+
+#main-nav .nav-link {
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+#main-nav .nav-link:hover {
+    color: var(--secondary-color);
+}
+
+/* 3. Hero Section (#lead) - TRIMMING APPLIED */
+#lead {
+    /* Reduced height for a minimalist, tighter look */
+    min-height: 80vh; 
+    
+    /* Center the content vertically within the new height */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+
+    background: url('path/to/a/professional/background.jpg') no-repeat center center/cover;
+    position: relative;
+    
+    /* Remove excess padding-top (flex handles centering now) */
+    padding-top: 0; 
+}
+
+#lead-content {
+    position: relative;
+    z-index: 2;
+    color: var(--text-color); 
+    background: rgba(255, 255, 255, 0.95); 
+    
+    /* Reduced internal padding */
+    padding: 2rem !important; 
+    border-radius: 1.5rem !important; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: none; 
+}
+
+#lead-content h1 {
+    color: var(--primary-color);
+    text-shadow: none; 
+}
+#lead-content h2 {
+    color: #555;
+    text-shadow: none;
+}
+
+
+.scroll-down-btn {
+    z-index: 2;
+    color: white !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* --- Gamified About Me Section --- */
+
+#about {
+    background-color: var(--bg-dark); 
+    color: var(--light-font); 
+}
+
+#about-content {
+    background: var(--game-ui-background);
+    color: var(--game-ui-text);
+    border: 3px solid var(--primary-color); 
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(63, 81, 181, 0.7); 
+    overflow: hidden; 
+    position: relative;
+    animation: pulseBorder 2s ease-in-out 1;
+}
+
+#about-content p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: inherit;
+    opacity: 0; 
+    animation: fadeInGameText 1.5s forwards ease-out;
+}
+
+/* Gamified Animation Keyframes */
+@keyframes fadeInGameText {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseBorder {
+    0% { border-color: var(--primary-color); box-shadow: 0 0 10px rgba(63, 81, 181, 0.5); }
+    50% { border-color: var(--secondary-color); box-shadow: 0 0 30px rgba(255, 64, 129, 0.8); }
+    100% { border-color: var(--primary-color); box-shadow: 0 0 20px rgba(63, 81, 181, 0.7); }
+}
+
+
+/* 4. Experience Timeline */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px; /* Thicker line */
+    background: linear-gradient(to bottom, var(--current-color), var(--past-color)); /* Gradient timeline */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+/* Animation for current quest dot (pulse) */
+@keyframes dotPulse {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -12px;
+    background-color: white;
+    border: 4px solid var(--past-color); 
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: border-color 0.3s ease; 
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -12px;
+}
+
+/* Current Item (Green - Active Quest) */
+.timeline-item:first-of-type .timeline-content {
+    background-color: rgba(40, 167, 69, 0.2) !important; 
+    border-left: 5px solid var(--current-color);
+}
+
+.timeline-item:first-of-type::after {
+    border-color: var(--current-color); 
+    background-color: var(--current-color); /* Solid green dot */
+    animation: dotPulse 2s infinite; /* Pulsing animation for current quest */
+}
+
+/* Past Items (Orange - Completed Quest) */
+.timeline-item:not(:first-of-type) .timeline-content {
+    background-color: rgba(253, 126, 20, 0.1) !important; 
+    border-left: 5px solid var(--past-color);
+}
+
+.timeline-item:not(:first-of-type)::after {
+    border-color: var(--past-color); 
+}
+
+/* Responsive timeline for smaller screens */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 0%;
+    }
+
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after {
+        left: 18px;
+    }
+}
+
+/* 5. Certifications - Gamified as 'Achievements' */
+#certifications {
+    background-color: var(--bg-dark); /* Dark background */
+    color: var(--light-font); /* Light Font Correction */
+}
+
+.d-flex a.shadow-sm {
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent !important;
+}
+
+.d-flex a.shadow-sm:hover {
+    transform: scale(1.1); /* Pop out on hover */
+    /* Add glowing effect */
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 15px var(--secondary-color) !important;
+}
+
+
+/* 6. Projects & Accordion */
+.project .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Project Card Hover Animation (Applies to Tech Projects) */
+.project .card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.project .card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2) !important; 
+}
+
+
+.accordion-button {
+    font-weight: bold;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    background-color: var(--primary-color) !important;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--secondary-color) !important;
+}
+
+/* --- Games and Utilities Animation (Part of Projects) --- */
+
+#projects #dynamic-lists {
+    padding-left: 0; /* Ensures proper centering of the buttons */
+}
+
+#projects #dynamic-lists li a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: var(--primary-color);
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Snappy transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#projects #dynamic-lists li a:hover {
+    transform: scale(1.05) translateY(-5px); 
+    background-color: var(--secondary-color); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframes for Subtle Entrance Animation (used for staggering by JS) */
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#projects #dynamic-lists li {
+    opacity: 0; 
+    animation: slideUpFadeIn 0.5s forwards;
+}
+
+
+/* 7. Digital Presence - Gamified System Menu */
+#digital-presence {
+    background-color: var(--bg-dark); /* Consistent dark theme */
+    color: var(--light-font); /* Light Font Correction */
+}
+
+#digital-presence .col-lg-4 {
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--game-ui-background);
+    margin-bottom: 20px;
+    box-shadow: var(--glow-primary);
+}
+
+#digital-presence .heading {
+    color: var(--game-ui-text);
+    text-shadow: none;
+}
+
+#digital-presence .btn-outline-dark {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+#digital-presence .btn-outline-dark:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--glow-primary);
+}
+
+/* YouTube Section styling */
+#youtube .btn-danger {
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+#youtube .btn-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px red;
+}
+
+
+/* 8. Contact Button */
+.btn-danger {
+    background-color: #e91e63 !important;
+    border-color: #e91e63 !important;
+}
+
+
+/* 9. Dark Mode Styling */
+#page-container.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--light-font);
+}
+
+#page-container.dark-mode .heading {
+    color: var(--secondary-color);
+}
+
+#page-container.dark-mode #main-nav {
+    background-color: rgba(33, 37, 41, 0.95);
+    border-bottom-color: var(--secondary-color);
+}
+
+#page-container.dark-mode #main-nav .nav-link {
+    color: var(--light-font);
+}
+
+/* DARK MODE - #lead-content */
+#page-container.dark-mode #lead-content {
+    background: rgba(33, 37, 41, 0.95); 
+    color: var(--light-font); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+#page-container.dark-mode #lead-content h1, 
+#page-container.dark-mode #lead-content h2 {
+    color: var(--light-font); 
+}
+
+/* DARK MODE - About Content */
+#page-container.dark-mode #about-content {
+    background: #333 !important;
+    color: #eee;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 20px rgba(255, 64, 129, 0.5); 
+}
+
+/* DARK MODE - Digital Presence Menu */
+#page-container.dark-mode #digital-presence .col-lg-4 {
+    border-color: var(--secondary-color);
+    box-shadow: var(--glow-secondary);
+}
+
+#page-container.dark-mode #digital-presence .btn-outline-dark {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+#page-container.dark-mode #digital-presence .btn-outline-dark:hover {
+    background-color: var(--secondary-color);
+    color: black;
+    box-shadow: var(--glow-secondary);
+}
+
+
+/* Scroll to Top Button */
+#to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block; 
+    z-index: 1000;
+}
