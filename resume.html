@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimal Tiwari | Software Engineer Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Fonts - Updated to Poppins */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            /* Light background for a clean look */
+        }
+
+        /* Page Container Styling */
+        .container {
+            max-width: 1100px;
+            /* Increased max width for the two-column layout */
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for a paper effect */
+            padding: 3rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: #007bff;
+            /* Primary blue color for headings */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Side Panel Styling */
+        .sidebar {
+            background-color: #f1f8ff;
+            /* Light blue background for emphasis */
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            /* Ensure the panel only takes necessary vertical space */
+            margin-top: 1.5rem;
+            /* Align with the start of the main content */
+        }
+
+        @media (max-width: 991px) {
+            .sidebar {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Experience and Education Items */
+        .experience-item,
+        .education-item {
+            border-left: 3px solid #ced4da;
+            /* Light gray line next to items */
+            padding-left: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* List Styling (Summary and Roles) */
+        ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            padding-left: 0;
+        }
+
+        ul li::before {
+            content: "\2022";
+            /* Custom bullet point (large dot) */
+            color: #007bff;
+            /* Blue color for bullets */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .role-list li::before {
+            content: "\25CF";
+            /* Smaller, filled circle for sub-lists */
+            color: #6c757d;
+            /* Secondary color */
+        }
+
+        /* Badge Styling for Skills */
+        .badge {
+            font-size: 0.85em;
+            padding: 0.6em 0.8em;
+            margin-top: 0.25rem;
+            display: inline-block;
+        }
+
+        /* Customizing Bootstrap Colors (Optional) */
+        .text-primary {
+            color: #007bff !important;
+        }
+
+        /* Skills Badge Colors (with black text) */
+        .bg-info {
+            background-color: #e0f7fa !important;
+            color: #000000 !important;
+        }
+
+        .bg-success {
+            background-color: #c8e6c9 !important;
+            color: #000000 !important;
+        }
+
+        .bg-warning {
+            background-color: #fffde7 !important;
+            color: #000000 !important;
+        }
+
+        .bg-danger {
+            background-color: #ffebee !important;
+            color: #000000 !important;
+        }
+
+        .bg-secondary {
+            background-color: #eceff1 !important;
+            color: #000000 !important;
+        }
+
+        /* NEW: Orange badge color for Tools */
+        .bg-orange {
+            background-color: #ff9800 !important;
+            color: #000000 !important;
+        }
+
+        /* Contact Info Styling - Highlighted in Blue */
+        .contact-info a {
+            color: #007bff;
+            /* Set base link color to blue */
+        }
+
+        .contact-info a:hover {
+            color: #0056b3;
+            /* Darker blue on hover for effect */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-5">
+        <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <div>
+                <h1 class="display-4 fw-bold text-primary">Vimal Tiwari</h1>
+                <p class="lead text-secondary">Software Engineer</p>
+            </div>
+            <div class="contact-info text-end small">
+                <p class="mb-0">Email: <a href="mailto:vimaltiwari2612@gmail.com"
+                        class="text-decoration-none">vimaltiwari2612@gmail.com</a></p>
+                <p class="mb-0">Mob: +919179352885</p>
+                <p class="mb-0">GitHub: <a href="https://github.com/vimaltiwari2612" target="_blank"
+                        class="text-decoration-none">github.com/vimaltiwari2612</a></p>
+                <p class="mb-0">LinkedIn: <a href="https://linkedin.com/in/vimaltiwari2612" target="_blank"
+                        class="text-decoration-none">linkedin.com/in/vimaltiwari2612</a></p>
+                <p class="mb-0">Website: <a href="https://vimaltiwari2612.github.io" target="_blank"
+                        class="text-decoration-none">vimaltiwari2612.github.io</a></p>
+                <p class="mb-0">Blog: <a href="https://medium.com/elevate-salesforce" target="_blank"
+                        class="text-decoration-none">medium.com/elevate-salesforce</a></p>
+            </div>
+        </header>
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <section id="summary" class="mb-5">
+                    <h2 class="section-title text-primary border-bottom pb-2 mb-3">SUMMARY</h2>
+                    <ul>
+                        <li>9+ years of experience in Software development.</li>
+                        <li>Experience in both frontend and backend Software development.</li>
+                        <li>Experienced in developing business processes, requirement gathering, designing system
+                            architecture and system solutions based on cloud and Non cloud platforms.</li>
+                        <li>Experience on Salesforce - Force.com, Apex, Triggers, Visualforce, Async Apex, Integrations,
+                            Lightning, LWC etc. with end-to-end product development.</li>
+                        <li>Experience on Java and Android - designing solutions using OOP, Collections, Ul using
+                            JavaFX, Swing, List View & Adapters, Rest API integration and JSON parsing.</li>
+                        <li>Experience on Web Development - Built responsive web sites using Lazy loading, Async JS,
+                            Front end business implementations using JavaScript.</li>
+                        <li>Salesforce Certified Platform Developer 1 & 2.</li>
+                    </ul>
+                </section>
+
+                <section id="experience" class="mb-5">
+                    <h2 class="section-title text-primary border-bottom pb-2 mb-4">EXPERIENCE</h2>
+
+                    <div class="experience-item mb-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 fw-bold">Application Engineer</h5>
+                            <span class="text-muted">Oct 2021- Present Date</span>
+                        </div>
+                        <p class="mb-2 text-secondary">Google, Bangalore, India</p>
+                        <h6>Roles and Responsibilities:</h6>
+                        <ul class="role-list">
+                            <li>Optimize Business processes through scalable code.</li>
+                            <li>Designed Integrations with and without middle ware.</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item mb-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 fw-bold">Senior Software Engineer</h5>
+                            <span class="text-muted">Dec 2018 Oct 2021</span>
+                        </div>
+                        <p class="mb-2 text-secondary">Q2, Bangalore, India</p>
+                        <h6>Roles and Responsibilities:</h6>
+                        <ul class="role-list">
+                            <li>Optimize Business processes through scalable code.</li>
+                            <li>Implementations of Complex features using OOP.</li>
+                            <li>Designed Generic Data Archival Framework.</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item mb-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 fw-bold">Software Engineer</h5>
+                            <span class="text-muted">Sept 2016-Dec 2018</span>
+                        </div>
+                        <p class="mb-2 text-secondary">Persistent Systems Ltd. Nagpur, India</p>
+                        <h6>Roles and Responsibilities:</h6>
+                        <ul class="role-list">
+                            <li>Written business logics in Apex and Java.</li>
+                            <li>Ul development using HTML, JavaScript, and jQuery.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="education" class="mb-5">
+                    <h2 class="section-title text-primary border-bottom pb-2 mb-3">EDUCATION</h2>
+                    <div class="education-item">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 fw-bold">Information & Technology, Bachelor of Engineering (BE)</h5>
+                            <span class="text-muted">2012-2016</span>
+                        </div>
+                        <p class="mb-0 text-secondary">Shri G S Institute of Technology & Science- Indore, MP, India</p>
+                        <p class="small text-success">Gold Medalist of IT 2012-2016</p>
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="col-lg-4">
+                <section id="skills" class="sidebar">
+                    <h2 class="section-title text-primary border-bottom pb-2 mb-3">SKILLS</h2>
+
+                    <div class="skill-category mb-4">
+                        <h5 class="fw-bold">Core Concepts</h5>
+                        <span class="badge bg-info me-1 mb-1">Data Structures</span>
+                        <span class="badge bg-info me-1 mb-1">Algorithms</span>
+                        <span class="badge bg-info me-1 mb-1">Design Patterns</span>
+                        <span class="badge bg-info me-1 mb-1">System Design</span>
+                    </div>
+
+                    <div class="skill-category mb-4">
+                        <h5 class="fw-bold">Salesforce</h5>
+                        <span class="badge bg-success me-1 mb-1">Apex</span>
+                        <span class="badge bg-success me-1 mb-1">Visualforce</span>
+                        <span class="badge bg-success me-1 mb-1">Lightning</span>
+                        <span class="badge bg-success me-1 mb-1">LWC & Aura</span>
+                        <span class="badge bg-success me-1 mb-1">Integration</span>
+                        <span class="badge bg-success me-1 mb-1">Async Apex</span>
+                        <span class="badge bg-success me-1 mb-1">Triggers</span>
+                        <span class="badge bg-success me-1 mb-1">Batches</span>
+                    </div>
+
+                    <div class="skill-category mb-4">
+                        <h5 class="fw-bold">Java & Android</h5>
+                        <span class="badge bg-warning me-1 mb-1">Core Java</span>
+                        <span class="badge bg-warning me-1 mb-1">Collections</span>
+                        <span class="badge bg-warning me-1 mb-1">Rest API</span>
+                        <span class="badge bg-warning me-1 mb-1">JDBC</span>
+                        <span class="badge bg-warning me-1 mb-1">JSON</span>
+                        <span class="badge bg-warning me-1 mb-1">Adapters (Android)</span>
+                        <span class="badge bg-warning me-1 mb-1">Caching (Android)</span>
+                        <span class="badge bg-warning me-1 mb-1">Life cycle (Android)</span>
+                    </div>
+
+                    <div class="skill-category mb-4">
+                        <h5 class="fw-bold">Web & Data Base</h5>
+                        <span class="badge bg-danger me-1 mb-1">HTML & CSS</span>
+                        <span class="badge bg-danger me-1 mb-1">JavaScript</span>
+                        <span class="badge bg-danger me-1 mb-1">jQuery</span>
+                        <span class="badge bg-danger me-1 mb-1">Bootstrap</span>
+                        <span class="badge bg-secondary me-1 mb-1">MySQL</span>
+                        <span class="badge bg-secondary me-1 mb-1">Mongo</span>
+                    </div>
+
+                    <div class="skill-category mb-4">
+                        <h5 class="fw-bold">Tools</h5>
+                        <span class="badge bg-orange me-1 mb-1">GitHub</span>
+                        <span class="badge bg-orange me-1 mb-1">Android Studio</span>
+                        <span class="badge bg-orange me-1 mb-1">JIRA</span>
+                        <span class="badge bg-orange me-1 mb-1">Gradle/ANT</span>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Set the current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
