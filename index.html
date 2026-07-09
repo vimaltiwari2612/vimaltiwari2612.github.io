@@ -160,34 +160,17 @@
             color: #858585 !important;
             opacity: 1 !important;
         }
-        .form-control-vscode::-webkit-input-placeholder {
-            color: #858585 !important;
-        }
-        .form-control-vscode::-moz-placeholder {
-            color: #858585 !important;
-            opacity: 1 !important;
-        }
 
-        /* Styles specifically matching dynamic JS app injections */
-        #dynamic-lists .btn-outline-dark,
-        #dynamic-lists a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem 1.2rem;
-            background: var(--vscode-sidebar) !important;
-            border: 1px solid #2d2d2d !important;
-            border-radius: 6px !important;
-            text-decoration: none !important;
-            color: var(--vscode-text) !important;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+        /* Dynamic Deployment Grid & Injections Style Override */
+        .live-deployment-card {
+            background: var(--vscode-sidebar);
+            border: 1px solid #2d2d2d;
+            border-radius: 6px;
             transition: all 0.2s ease;
         }
-        #dynamic-lists a:hover {
-            background: #2a2a2a !important;
-            color: #fff !important;
-            border-color: var(--vscode-accent) !important;
+        .live-deployment-card:hover {
+            border-color: #28a745;
+            box-shadow: 0 6px 12px rgba(40,167,69,0.15);
         }
 
         hr { border-top: 1px solid #2d2d2d; opacity: 1; }
@@ -411,6 +394,39 @@
         </div>
     </section>
 
+    <!-- Live GitHub Pages Deployments Hub Section (Carousel Refactored Layout) -->
+    <section id="live-deployments" class="py-5 border-top" style="background-color: var(--vscode-bg);">
+        <div class="container">
+            <div class="code-font mb-2 text-center text-md-start"><span class="syntax-keyword">fetch</span>(<span class="syntax-string">'https://api.github.com/users/vimaltiwari2612/repos'</span>)</div>
+            <h2 class="fw-bold mb-4 text-white text-center text-md-start">Live Projects</h2>
+            <p class="text-secondary small mb-4 code-font text-center text-md-start"><span class="syntax-comment">// Dynamically parsed repositories with active public live instances via GitHub Pages API</span></p>
+            
+            <!-- Dynamic Carousel Parent Wrapper Element Component Layout -->
+            <div id="deploymentsCarousel" class="carousel slide px-md-5" data-bs-ride="carousel" data-bs-interval="7000">
+                <!-- Indicators array structure mount anchor -->
+                <div id="deployments-carousel-indicators" class="carousel-indicators mb-n4"></div>
+
+                <!-- Main asynchronous injection track line viewport -->
+                <div id="github-pages-dynamic-carousel-inner" class="carousel-inner">
+                    <div class="text-center py-5 text-secondary code-font">
+                        <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+                        await scanning_deployment_registry...
+                    </div>
+                </div>
+
+                <!-- Slider Navigation Controllers -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#deploymentsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#deploymentsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Side-by-Side Unified Links Grid -->
     <section id="digital-presence" class="py-5 border-top border-bottom" style="background-color: var(--vscode-sidebar);">
         <div class="container">
@@ -569,5 +585,86 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
     <script src="js/portfolio.js"></script>
+
+    <!-- Dynamic Deployment Carousel Script Engine -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const username = "vimaltiwari2612";
+            const carouselInner = document.getElementById("github-pages-dynamic-carousel-inner");
+            const indicatorsContainer = document.getElementById("deployments-carousel-indicators");
+
+            fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`)
+                .then(response => {
+                    if (!response.ok) throw new Error("API stream connection dropped.");
+                    return response.json();
+                })
+                .then(repos => {
+                    // Filter repositories with active GitHub pages branches (excluding parent hub name context)
+                    const livePagesRepos = repos.filter(repo => repo.has_pages && repo.name.toLowerCase() !== `${username}.github.io`);
+
+                    if (livePagesRepos.length === 0) {
+                        carouselInner.innerHTML = `<div class="text-secondary code-font text-center py-5">// No live sub-pages deployment nodes found active.</div>`;
+                        return;
+                    }
+
+                    carouselInner.innerHTML = ""; // Clear loader
+                    indicatorsContainer.innerHTML = "";
+
+                    // Dynamically bundle cards in pairs of 2 for clean layout distribution slides
+                    const itemsPerSlide = 2;
+                    let slideIndex = 0;
+
+                    for (let i = 0; i < livePagesRepos.length; i += itemsPerSlide) {
+                        const chunk = livePagesRepos.slice(i, i + itemsPerSlide);
+                        const isActive = slideIndex === 0 ? "active" : "";
+
+                        // Append indicator bubble nodes
+                        const indicatorHtml = `<button type="button" data-bs-target="#deploymentsCarousel" data-bs-slide-to="${slideIndex}" class="${isActive}" aria-label="Slide ${slideIndex + 1}"></button>`;
+                        indicatorsContainer.insertAdjacentHTML("beforeend", indicatorHtml);
+
+                        // Compile slide container
+                        let slideCardsHtml = "";
+                        chunk.forEach(repo => {
+                            const deploymentUrl = `https://${username}.github.io/${repo.name}/`;
+                            const languageTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : "";
+                            
+                            slideCardsHtml += `
+                                <div class="col-md-6">
+                                    <div class="live-deployment-card p-4 shadow-sm d-flex flex-column h-100">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold text-white mb-0 text-truncate code-font" title="${repo.name}">${repo.name}</h6>
+                                            <span class="small text-success" style="font-size: 0.75rem;"><i class="fas fa-circle-check me-1"></i>Live</span>
+                                        </div>
+                                        <p class="text-secondary small mb-4 text-start flex-grow-1" style="font-size: 0.8rem; line-height: 1.45;">
+                                            ${repo.description || "Interactive solution suite built and compiled on public stack modules."}
+                                        </p>
+                                        <div class="d-flex align-items-center justify-content-between mt-auto pt-2 border-top border-dark">
+                                            ${languageTag}
+                                            <a href="${deploymentUrl}" target="_blank" class="text-decoration-none small code-font text-success fw-semibold">
+                                                launch_app <i class="fas fa-external-link-alt ms-1 small"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        const itemHtml = `
+                            <div class="carousel-item ${isActive}">
+                                <div class="row g-4 px-3">
+                                    ${slideCardsHtml}
+                                </div>
+                            </div>
+                        `;
+                        carouselInner.insertAdjacentHTML("beforeend", itemHtml);
+                        slideIndex++;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    carouselInner.innerHTML = `<div class="text-danger code-font text-center py-5">// Execution exception: fallback_pipeline_failure</div>`;
+                });
+        });
+    </script>
 </body>
 </html>
