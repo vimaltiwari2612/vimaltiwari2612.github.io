@@ -19,6 +19,7 @@
             --vscode-keyword: #569cd6;
             --vscode-number: #b5cea8;
             --vscode-className: #4ec9b0;
+            --arcade-green: #39ff14;
         }
 
         body { 
@@ -64,17 +65,11 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
 
-        /* Timeline Remapped into IDE Code Traces */
-        .timeline-container { position: relative; border-left: 2px solid #333; padding-left: 2rem; margin-left: 1rem; }
-        .timeline-item { position: relative; margin-bottom: 2.5rem; }
-        .timeline-item::before { 
-            content: ''; 
-            position: absolute; 
-            left: calc(-2rem - 5px); 
-            top: 6px; width: 10px; 
-            height: 10px; 
-            background-color: var(--vscode-accent); 
-            border-radius: 50%; 
+        /* Timeline Node Box Remapped inside Work Carousel */
+        .experience-card-node {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--vscode-accent);
         }
 
         .tech-tag { 
@@ -132,16 +127,24 @@
             border-color: #555;
         }
 
-        /* Carousel Navigation Controls */
-        .carousel-control-prev, .carousel-control-next {
-            width: 4%;
-            opacity: 0.7;
+        /* Compact Column Deck Carousel Settings */
+        .deck-carousel .carousel-control-prev, 
+        .deck-carousel .carousel-control-next {
+            width: 8%;
+            opacity: 0.5;
         }
-        .carousel-control-prev:hover, .carousel-control-next:hover {
+        .deck-carousel .carousel-control-prev:hover, 
+        .deck-carousel .carousel-control-next:hover {
             opacity: 1;
         }
-        .carousel-indicators [data-bs-target] {
+        .deck-carousel .carousel-indicators {
+            bottom: -35px;
+        }
+        .deck-carousel .carousel-indicators [data-bs-target] {
             background-color: var(--vscode-accent);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
         }
 
         /* Form styling and placeholder color overrides */
@@ -171,6 +174,43 @@
         .live-deployment-card:hover {
             border-color: #28a745;
             box-shadow: 0 6px 12px rgba(40,167,69,0.15);
+        }
+
+        /* Gamified Retro Cabinet Styling */
+        .arcade-cabinet {
+            background: #111112;
+            border: 2px dashed #3e3e42;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+        .arcade-screen {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            background-size: 100% 4px, 6px 100%;
+            border: 1px solid #2d2d30;
+            border-radius: 4px;
+        }
+        .arcade-card {
+            background: #1a1a1c;
+            border-left: 3px solid var(--arcade-green);
+            transition: all 0.2s ease;
+        }
+        .arcade-card:hover {
+            background: #222225;
+            border-color: #fff;
+        }
+        .xp-bar {
+            height: 5px;
+            background-color: #2d2d30;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .xp-progress {
+            width: 25%;
+            height: 100%;
+            background-color: var(--arcade-green);
+            box-shadow: 0 0 6px var(--arcade-green);
+            transition: width 0.4s ease;
         }
 
         hr { border-top: 1px solid #2d2d2d; opacity: 1; }
@@ -216,213 +256,202 @@
         </div>
     </header>
 
-    <!-- Work Experience Section -->
+    <!-- Work Experience Section Refactored as an IDE Tab Carousel Layout -->
     <section class="py-5 border-top border-bottom" style="background-color: #1a1a1a;">
-        <div class="container" style="max-width: 850px;">
-            <div class="code-font mb-4 text-center text-md-start"><span class="syntax-comment">// Output stream detailing engineering trace files</span></div>
-            <h2 class="fw-bold mb-5 text-white text-center text-md-start">Work Experience</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
-                    <span class="syntax-keyword small code-font">Oct 2021 – Present</span>
-                    <h4 class="fw-bold text-white mt-1 mb-0">Google</h4>
-                    <p class="syntax-class fw-medium mb-2 code-font">Software Application Engineer &mdash; Bengaluru, India</p>
-                    <p style="color: #aaaaaa;">Engineering robust backend systems architectures and low-latency internal structures to support international server pipeline operations securely.</p>
+        <div class="container" style="max-width: 750px;">
+            <div class="code-font mb-4 text-center"><span class="syntax-comment">// Output stream detailing historical engineering logs</span></div>
+            <h2 class="fw-bold mb-4 text-center text-white">Work Experience</h2>
+            
+            <div id="experienceDeckCarousel" class="carousel slide deck-carousel p-4 card-custom shadow-sm" data-bs-ride="carousel" data-bs-interval="8000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="3"></button>
                 </div>
-                <div class="timeline-item">
-                    <span class="syntax-keyword small code-font">Jan 2019 – Oct 2021</span>
-                    <h4 class="fw-bold text-white mt-1 mb-0">Q2</h4>
-                    <p class="syntax-class fw-medium mb-2 code-font">Senior Software Engineer &mdash; Bengaluru, India</p>
-                    <p style="color: #aaaaaa;">Designed secure transactional pipeline clusters and cloud full-stack modules servicing remote enterprise online banking suites.</p>
+
+                <div class="carousel-inner">
+                    <!-- Experience Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="experience-card-node p-2">
+                            <span class="syntax-keyword small code-font d-block mb-1">Oct 2021 – Present</span>
+                            <h4 class="fw-bold text-white mb-1">Google</h4>
+                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Application Engineer &mdash; Bengaluru, India</p>
+                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Engineering robust backend systems architectures and low-latency internal structures to support international server pipeline operations securely.</p>
+                        </div>
+                    </div>
+
+                    <!-- Experience Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="experience-card-node p-2">
+                            <span class="syntax-keyword small code-font d-block mb-1">Jan 2019 – Oct 2021</span>
+                            <h4 class="fw-bold text-white mb-1">Q2</h4>
+                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Senior Software Engineer &mdash; Bengaluru, India</p>
+                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Designed secure transactional pipeline clusters and cloud full-stack modules servicing remote enterprise online banking suites.</p>
+                        </div>
+                    </div>
+
+                    <!-- Experience Slide 3 -->
+                    <div class="carousel-item">
+                        <div class="experience-card-node p-2">
+                            <span class="syntax-keyword small code-font d-block mb-1">Sep 2016 – Dec 2018</span>
+                            <h4 class="fw-bold text-white mb-1">Persistent Systems Ltd</h4>
+                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Engineer &mdash; Nagpur, India</p>
+                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Assembled metadata schema systems and business logic transformation processes working on distributed CRM platform layers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Experience Slide 4 -->
+                    <div class="carousel-item">
+                        <div class="experience-card-node p-2">
+                            <span class="syntax-keyword small code-font d-block mb-1">May 2015 – Jul 2015</span>
+                            <h4 class="fw-bold text-white mb-1">Samadhan WS</h4>
+                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Android Developer Intern &mdash; Indore, India</p>
+                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Modified structural functional blocks across native mobile packages utilizing initial platform component environments.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span class="syntax-keyword small code-font">Sep 2016 – Dec 2018</span>
-                    <h4 class="fw-bold text-white mt-1 mb-0">Persistent Systems Ltd</h4>
-                    <p class="syntax-class fw-medium mb-2 code-font">Software Engineer &mdash; Nagpur, India</p>
-                    <p style="color: #aaaaaa;">Assembled metadata schema systems and business logic transformation processes working on distributed CRM platform layers.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="syntax-keyword small code-font">May 2015 – Jul 2015</span>
-                    <h4 class="fw-bold text-white mt-1 mb-0">Samadhan WS</h4>
-                    <p class="syntax-class fw-medium mb-2 code-font">Android Developer Intern &mdash; Indore, India</p>
-                    <p style="color: #aaaaaa;">Modified structural functional blocks across native mobile packages utilizing initial platform component environments.</p>
-                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
             </div>
         </div>
     </section>
 
-    <!-- Technical Projects Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="code-font mb-2 text-center"><span class="syntax-comment">/* System build creations array */</span></div>
-            <h2 class="fw-bold mb-5 text-center text-white">Tech Projects & Creations</h2>
+    <!-- UNIFIED BUILD DECKS: 1 Row with 3 Carousel Columns Layout -->
+    <section id="unified-creation-row" class="py-5" style="background-color: var(--vscode-bg);">
+        <div class="container-fluid px-md-5">
+            <div class="code-font mb-4 text-center text-lg-start"><span class="syntax-comment">// Multi-threaded carousel clusters initialization matrix</span></div>
             
-            <!-- Carousel Display wrapper layout -->
-            <div id="projectsCarousel" class="carousel slide px-md-5" data-bs-ride="carousel" data-bs-interval="6000">
-                <div class="carousel-indicators mb-n4">
-                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-
-                <div class="carousel-inner">
-                    <!-- Carousel Slide Group 1 -->
-                    <div class="carousel-item active">
-                        <div class="row g-4 px-3">
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <div class="d-flex justify-content-between align-items-start mb-3">
-                                            <h5 class="fw-bold text-white mb-0 code-font">codeParserEngine.java</h5>
-                                            <span class="badge bg-success bg-opacity-10 text-success rounded-3 small px-2 py-1 code-font" style="font-size:0.7rem;">Stable</span>
+            <div class="row g-4">
+                
+                <!-- COLUMN 1: Tech Projects & Creations -->
+                <div class="col-lg-4 d-flex flex-column">
+                    <div class="d-flex align-items-center gap-2 mb-3 px-1">
+                        <i class="fas fa-folder text-warning fs-5"></i>
+                        <h4 class="fw-bold text-white fs-5 mb-0">Tech Projects</h4>
+                    </div>
+                    
+                    <div id="projectsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="6000">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        
+                        <div class="carousel-inner h-100">
+                            <!-- Slide 1 -->
+                            <div class="carousel-item active h-100">
+                                <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                    <div>
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold text-white mb-0 code-font">codeParserEngine.java</h6>
+                                            <span class="badge bg-success bg-opacity-10 text-success small px-2 py-05 code-font" style="font-size:0.65rem;">Stable</span>
                                         </div>
-                                        <p class="small mb-4" style="color: #aaaaaa;">A strict syntactical source code parser application built to read nested Java structural blueprints and convert dependencies directly into standard UML layouts.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">Java</span>
-                                            <span class="tech-tag">Compiler-Design</span>
-                                            <span class="tech-tag">AST</span>
-                                        </div>
+                                        <p class="small text-secondary mb-3">Syntactical source code parser built to read Java structural blueprints and convert fields directly into standard UML layouts.</p>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">Java</span><span class="tech-tag">AST</span></div>
                                         <a target="_blank" href="https://github.com/vimaltiwari2612/JavaCodeParserAndUMLCreator" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <div class="d-flex justify-content-between align-items-start mb-3">
-                                            <h5 class="fw-bold text-white mb-0 code-font">metaQueryExtension.js</h5>
-                                            <span class="badge bg-warning bg-opacity-10 text-warning rounded-3 small px-2 py-1 code-font" style="font-size:0.7rem;">Active</span>
+                            <!-- Slide 2 -->
+                            <div class="carousel-item h-100">
+                                <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                    <div>
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold text-white mb-0 code-font">metaQueryExtension.js</h6>
+                                            <span class="badge bg-warning bg-opacity-10 text-warning small px-2 py-05 code-font" style="font-size:0.65rem;">Active</span>
                                         </div>
-                                        <p class="small mb-4" style="color: #aaaaaa;">A fast background browser processing environment optimized for asynchronous data schema mapping queries and runtime SOQL executions.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">JavaScript</span>
-                                            <span class="tech-tag">Chrome-API</span>
-                                            <span class="tech-tag">SOQL</span>
-                                        </div>
+                                        <p class="small text-secondary mb-3">Background browser processing extension optimized for asynchronous schema queries and direct real-time runtime SOQL executions.</p>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">JavaScript</span><span class="tech-tag">Chrome-API</span></div>
                                         <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceChromeExtension" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Slide Group 2 -->
-                    <div class="carousel-item">
-                        <div class="row g-4 px-3">
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <h5 class="fw-bold text-white mb-3 code-font">covidAnalyticsTracker.apk</h5>
-                                        <p class="small mb-4" style="color: #aaaaaa;">Mobile engine package written to fetch global API state arrays and chart analytics metrics for tracking health records safely.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">Android-SDK</span>
-                                            <span class="tech-tag">REST-API</span>
-                                            <span class="tech-tag">Data-Viz</span>
+                            <!-- Slide 3 -->
+                            <div class="carousel-item h-100">
+                                <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                    <div>
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold text-white mb-0 code-font">virtualClassroom.java</h6>
+                                            <span class="badge bg-info bg-opacity-10 text-info small px-2 py-05 code-font" style="font-size:0.65rem;">Core</span>
                                         </div>
-                                        <a target="_blank" href="https://github.com/vimaltiwari2612/Covid19AndroidApp" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
+                                        <p class="small text-secondary mb-3">Interactive portal core engineered to support real-time video frames, collaborative messages, and synchronized streaming relays.</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <h5 class="fw-bold text-white mb-3 code-font">avengersStateGame.js</h5>
-                                        <p class="small mb-4" style="color: #aaaaaa;">Web script verifying evaluation speed configurations, browser rendering ticks, and real-time element state synchronization frameworks.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">Vanilla-JS</span>
-                                            <span class="tech-tag">DOM-Core</span>
-                                            <span class="tech-tag">Animation</span>
-                                        </div>
-                                        <a target="_blank" href="http://vimaltiwari.coolpage.biz/Game/Avengers-Memory-Game/index.html" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">run_application <i class="fas fa-external-link-alt ms-1 small"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Slide Group 3 -->
-                    <div class="carousel-item">
-                        <div class="row g-4 px-3">
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <h5 class="fw-bold text-white mb-3 code-font">virtualClassroomServer.java</h5>
-                                        <p class="small mb-4" style="color: #aaaaaa;">Interactive portal core engineered to facilitate peer-to-peer real-time video feeds, collaborative message relays, and synchronized stream frames.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">Java</span>
-                                            <span class="tech-tag">Live-Streaming</span>
-                                            <span class="tech-tag">WebSockets</span>
-                                        </div>
+                                    <div class="mt-auto">
+                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">Java</span><span class="tech-tag">WebSockets</span></div>
                                         <a target="_blank" href="https://github.com/vimaltiwari2612/VirtualClassroom" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card h-100 card-custom p-4 shadow-sm">
-                                    <div class="card-body d-flex flex-column p-0">
-                                        <h5 class="fw-bold text-white mb-3 code-font">apexDynamicSchemaUtils.cls</h5>
-                                        <p class="small mb-4" style="color: #aaaaaa;">Custom collection library using core metadata tokens, deep reflection APIs, and automated dynamic object mapping structures.</p>
-                                        <div class="d-flex flex-wrap gap-2 mb-4 mt-auto">
-                                            <span class="tech-tag">Apex</span>
-                                            <span class="tech-tag">Salesforce-Core</span>
-                                            <span class="tech-tag">Reflection</span>
-                                        </div>
-                                        <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceApexUtilites" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
-                                    </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: Live Deployments Hub -->
+                <div class="col-lg-4 d-flex flex-column">
+                    <div class="d-flex align-items-center gap-2 mb-3 px-1">
+                        <i class="fas fa-globe text-success fs-5"></i>
+                        <h4 class="fw-bold text-white fs-5 mb-0">Live Deployments</h4>
+                    </div>
+
+                    <div id="deploymentsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="7000">
+                        <div id="deck-deployments-indicators" class="carousel-indicators"></div>
+
+                        <div id="deck-deployments-carousel-inner" class="carousel-inner h-100">
+                            <div class="text-center py-5 my-4 text-secondary code-font small">
+                                <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+                                await stream_parsing...
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+
+                <!-- COLUMN 3: 8-Bit Retro Game Series Carousel -->
+                <div class="col-lg-4 d-flex flex-column">
+                    <div class="d-flex align-items-center justify-content-between mb-3 px-1">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-gamepad text-danger fs-5"></i>
+                            <h4 class="fw-bold text-white fs-5 mb-0">8-Bit Retro Space</h4>
+                        </div>
+                        <div class="code-font text-warning small fw-bold" style="font-size: 0.75rem;">XP: <span id="deck-arcade-xp">150</span></div>
+                    </div>
+
+                    <div class="arcade-cabinet p-3 flex-grow-1 d-flex flex-column">
+                        <div class="mb-2"><div class="xp-bar"><div id="deck-arcade-xp-fill" class="xp-progress"></div></div></div>
+                        
+                        <div id="arcadeDeckCarousel" class="carousel slide deck-carousel arcade-screen p-3 flex-grow-1" data-bs-ride="carousel" data-bs-interval="8000">
+                            <div id="deck-arcade-indicators" class="carousel-indicators"></div>
+
+                            <div id="deck-arcade-carousel-inner" class="carousel-inner h-100">
+                                <div class="text-center py-5 my-4 text-secondary code-font small">
+                                    <i class="fas fa-circle-notch fa-spin text-success me-2"></i>boot_rom...
                                 </div>
                             </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slider Directional Arrows -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
 
-            <!-- Global GitHub Link Button Directory Matching YouTube Style Layout -->
-            <div class="text-center mt-5 pt-3">
-                <a target="_blank" href="https://github.com/vimaltiwari2612" class="btn btn-vscode-primary px-4 py-2 code-font fw-semibold shadow-sm" style="font-size: 0.85rem;">
+            <!-- Global Footer CTA Buttons -->
+            <div class="text-center mt-5 pt-2">
+                <a target="_blank" href="https://github.com/vimaltiwari2612" class="btn btn-vscode-outline px-4 py-2 code-font small">
                     <i class="fab fa-github me-2"></i>open_github_repositories()
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live GitHub Pages Deployments Hub Section (Carousel Refactored Layout) -->
-    <section id="live-deployments" class="py-5 border-top" style="background-color: var(--vscode-bg);">
-        <div class="container">
-            <div class="code-font mb-2 text-center text-md-start"><span class="syntax-keyword">fetch</span>(<span class="syntax-string">'https://api.github.com/users/vimaltiwari2612/repos'</span>)</div>
-            <h2 class="fw-bold mb-4 text-white text-center text-md-start">Live Projects</h2>
-            <p class="text-secondary small mb-4 code-font text-center text-md-start"><span class="syntax-comment">// Dynamically parsed repositories with active public live instances via GitHub Pages API</span></p>
-            
-            <!-- Dynamic Carousel Parent Wrapper Element Component Layout -->
-            <div id="deploymentsCarousel" class="carousel slide px-md-5" data-bs-ride="carousel" data-bs-interval="7000">
-                <!-- Indicators array structure mount anchor -->
-                <div id="deployments-carousel-indicators" class="carousel-indicators mb-n4"></div>
-
-                <!-- Main asynchronous injection track line viewport -->
-                <div id="github-pages-dynamic-carousel-inner" class="carousel-inner">
-                    <div class="text-center py-5 text-secondary code-font">
-                        <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
-                        await scanning_deployment_registry...
-                    </div>
-                </div>
-
-                <!-- Slider Navigation Controllers -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#deploymentsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#deploymentsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
     </section>
@@ -498,33 +527,20 @@
                 </div>
             </div>
             
-            <!-- Standard Video Tile Grid -->
             <div class="row g-4 justify-content-center mt-2">
                 <div class="col-lg-4 col-md-6">
                     <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/w-6PQJE6xeY" 
-                                title="YouTube video 1" 
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/w-6PQJE6xeY" title="YouTube video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/TYg3RcN0phw" 
-                                title="YouTube video 2" 
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/TYg3RcN0phw" title="YouTube video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/M-1a_1pLHIY" 
-                                title="YouTube video 3" 
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/M-1a_1pLHIY" title="YouTube video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -586,83 +602,130 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
     <script src="js/portfolio.js"></script>
 
-    <!-- Dynamic Deployment Carousel Script Engine -->
+    <!-- Consolidated Parallel Multi-Carousel Async Script Engine -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const username = "vimaltiwari2612";
-            const carouselInner = document.getElementById("github-pages-dynamic-carousel-inner");
-            const indicatorsContainer = document.getElementById("deployments-carousel-indicators");
+            
+            // UI Hook Bindings
+            const deploymentsInner = document.getElementById("deck-deployments-carousel-inner");
+            const deploymentsIndicators = document.getElementById("deck-deployments-indicators");
+            const arcadeInner = document.getElementById("deck-arcade-carousel-inner");
+            const arcadeIndicators = document.getElementById("deck-arcade-indicators");
+            const xpCounter = document.getElementById("deck-arcade-xp");
+            const xpBarFill = document.getElementById("deck-arcade-xp-fill");
 
-            fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`)
-                .then(response => {
-                    if (!response.ok) throw new Error("API stream connection dropped.");
-                    return response.json();
-                })
-                .then(repos => {
-                    // Filter repositories with active GitHub pages branches (excluding parent hub name context)
-                    const livePagesRepos = repos.filter(repo => repo.has_pages && repo.name.toLowerCase() !== `${username}.github.io`);
+            // Gamified XP Matrix Interaction Handler
+            window.triggerArcadeXpGain = function() {
+                let xp = parseInt(xpCounter.innerText) || 150;
+                if (xp < 1000) {
+                    xp += 115;
+                    if(xp > 1000) xp = 1000;
+                    xpCounter.innerText = xp;
+                    xpBarFill.style.width = `${(xp / 1000) * 100}%`;
+                }
+            };
 
-                    if (livePagesRepos.length === 0) {
-                        carouselInner.innerHTML = `<div class="text-secondary code-font text-center py-5">// No live sub-pages deployment nodes found active.</div>`;
+            // --- ENDPOINT MATRIX 1: 8bit-game-series Carousel Generation ---
+            const arcadeSearchUrl = `https://api.github.com/search/repositories?q=user:${username}+topic:8bit-game-series`;
+            fetch(arcadeSearchUrl)
+                .then(res => res.json())
+                .then(data => {
+                    const games = data.items || [];
+                    if(games.length === 0) {
+                        arcadeInner.innerHTML = `<div class="text-secondary code-font small text-center py-5">// Arcade buffer clear.</div>`;
                         return;
                     }
+                    arcadeInner.innerHTML = "";
+                    arcadeIndicators.innerHTML = "";
 
-                    carouselInner.innerHTML = ""; // Clear loader
-                    indicatorsContainer.innerHTML = "";
+                    games.forEach((game, idx) => {
+                        const activeClass = idx === 0 ? "active" : "";
+                        const liveUrl = `https://${username}.github.io/${game.name}/`;
+                        const cleanTitle = game.name.replace(/8bit-/i, '').replace(/-/g, ' ').toUpperCase();
 
-                    // Dynamically bundle cards in pairs of 2 for clean layout distribution slides
-                    const itemsPerSlide = 2;
-                    let slideIndex = 0;
+                        arcadeIndicators.insertAdjacentHTML("beforeend", 
+                            `<button type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide-to="${idx}" class="${activeClass}"></button>`
+                        );
 
-                    for (let i = 0; i < livePagesRepos.length; i += itemsPerSlide) {
-                        const chunk = livePagesRepos.slice(i, i + itemsPerSlide);
-                        const isActive = slideIndex === 0 ? "active" : "";
-
-                        // Append indicator bubble nodes
-                        const indicatorHtml = `<button type="button" data-bs-target="#deploymentsCarousel" data-bs-slide-to="${slideIndex}" class="${isActive}" aria-label="Slide ${slideIndex + 1}"></button>`;
-                        indicatorsContainer.insertAdjacentHTML("beforeend", indicatorHtml);
-
-                        // Compile slide container
-                        let slideCardsHtml = "";
-                        chunk.forEach(repo => {
-                            const deploymentUrl = `https://${username}.github.io/${repo.name}/`;
-                            const languageTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : "";
-                            
-                            slideCardsHtml += `
-                                <div class="col-md-6">
-                                    <div class="live-deployment-card p-4 shadow-sm d-flex flex-column h-100">
+                        const slideHtml = `
+                            <div class="carousel-item ${activeClass} h-100">
+                                <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                    <div>
                                         <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="fw-bold text-white mb-0 text-truncate code-font" title="${repo.name}">${repo.name}</h6>
-                                            <span class="small text-success" style="font-size: 0.75rem;"><i class="fas fa-circle-check me-1"></i>Live</span>
+                                            <h6 class="code-font fw-bold mb-0" style="color:var(--arcade-green) !important;">[0${idx+1}] ${cleanTitle}</h6>
+                                            <span class="small text-success" style="font-size:0.7rem;"><i class="fas fa-gamepad me-1"></i>ROM</span>
                                         </div>
-                                        <p class="text-secondary small mb-4 text-start flex-grow-1" style="font-size: 0.8rem; line-height: 1.45;">
-                                            ${repo.description || "Interactive solution suite built and compiled on public stack modules."}
+                                        <p class="text-secondary small mb-3" style="font-size:0.78rem; line-height:1.4;">
+                                            ${game.description || "Authentic retro assembly solution built with low-fidelity logic configurations."}
                                         </p>
-                                        <div class="d-flex align-items-center justify-content-between mt-auto pt-2 border-top border-dark">
-                                            ${languageTag}
-                                            <a href="${deploymentUrl}" target="_blank" class="text-decoration-none small code-font text-success fw-semibold">
-                                                launch_app <i class="fas fa-external-link-alt ms-1 small"></i>
-                                            </a>
-                                        </div>
                                     </div>
-                                </div>
-                            `;
-                        });
-
-                        const itemHtml = `
-                            <div class="carousel-item ${isActive}">
-                                <div class="row g-4 px-3">
-                                    ${slideCardsHtml}
+                                    <div class="mt-auto pt-2 border-top border-dark d-flex align-items-center justify-content-between">
+                                        <span class="tech-tag" style="border-color:var(--arcade-green); color:var(--arcade-green);">8BIT</span>
+                                        <a href="${liveUrl}" target="_blank" onclick="triggerArcadeXpGain()" class="btn btn-sm btn-outline-success code-font px-2 py-05" style="font-size:0.68rem; border-color:var(--arcade-green); color:var(--arcade-green);">
+                                            INSERT_COIN <i class="fas fa-play ms-1" style="font-size:0.55rem;"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         `;
-                        carouselInner.insertAdjacentHTML("beforeend", itemHtml);
-                        slideIndex++;
-                    }
+                        arcadeInner.insertAdjacentHTML("beforeend", slideHtml);
+                    });
                 })
                 .catch(err => {
                     console.error(err);
-                    carouselInner.innerHTML = `<div class="text-danger code-font text-center py-5">// Execution exception: fallback_pipeline_failure</div>`;
+                    arcadeInner.innerHTML = `<div class="text-danger code-font small text-center py-5">// Arcade boot failure.</div>`;
+                });
+
+            // --- ENDPOINT MATRIX 2: Live GitHub Pages Deployments Hub ---
+            fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`)
+                .then(res => res.json())
+                .then(repos => {
+                    const pagesRepos = repos.filter(repo => repo.has_pages && repo.name.toLowerCase() !== `${username}.github.io`);
+                    
+                    if(pagesRepos.length === 0) {
+                        deploymentsInner.innerHTML = `<div class="text-secondary code-font small text-center py-5">// Clear deployment registry.</div>`;
+                        return;
+                    }
+                    deploymentsInner.innerHTML = "";
+                    deploymentsIndicators.innerHTML = "";
+
+                    pagesRepos.forEach((repo, idx) => {
+                        const activeClass = idx === 0 ? "active" : "";
+                        const deployUrl = `https://${username}.github.io/${repo.name}/`;
+                        const langTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : `<span class="tech-tag">Web</span>`;
+
+                        deploymentsIndicators.insertAdjacentHTML("beforeend", 
+                            `<button type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide-to="${idx}" class="${activeClass}"></button>`
+                        );
+
+                        const slideHtml = `
+                            <div class="carousel-item ${activeClass} h-100">
+                                <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                    <div>
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="fw-bold text-white mb-0 text-truncate code-font" style="max-width:75%;" title="${repo.name}">${repo.name}</h6>
+                                            <span class="small text-success" style="font-size:0.7rem;"><i class="fas fa-check-circle me-1"></i>Active</span>
+                                        </div>
+                                        <p class="text-secondary small mb-3" style="font-size:0.78rem; line-height:1.4;">
+                                            ${repo.description || "Active interface instance built and targeted on deployment streams successfully."}
+                                        </p>
+                                    </div>
+                                    <div class="mt-auto pt-2 border-top border-dark d-flex align-items-center justify-content-between">
+                                        ${langTag}
+                                        <a href="${deployUrl}" target="_blank" class="text-decoration-none small code-font text-success fw-semibold" style="font-size:0.75rem;">
+                                            launch_app <i class="fas fa-external-link-alt ms-1 small"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        deploymentsInner.insertAdjacentHTML("beforeend", slideHtml);
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    deploymentsInner.innerHTML = `<div class="text-danger code-font small text-center py-5">// Stream mapping failure.</div>`;
                 });
         });
     </script>
