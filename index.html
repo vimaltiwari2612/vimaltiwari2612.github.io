@@ -3,611 +3,785 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Vimal Tiwari | Software Engineer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Vimal Tiwari | Engineer & Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <style>
         :root {
-            --vscode-bg: #1e1e1e;
-            --vscode-sidebar: #252526;
-            --vscode-tabs: #2d2d2d;
-            --vscode-accent: #007acc;
-            --vscode-text: #d4d4d4;
-            --vscode-comment: #6a9955;
-            --vscode-string: #ce9178;
-            --vscode-keyword: #569cd6;
-            --vscode-number: #b5cea8;
-            --vscode-className: #4ec9b0;
+            --bg-color: #121316;
+            --text-color: #d4d4d4;
+            --surface-color: #1e1f24;
+            --border-color: #2d2f36;
+            --accent-color: #007acc;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
             --arcade-green: #39ff14;
         }
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--vscode-bg); 
-            color: var(--vscode-text); 
+        /* --- Theme: VS Code Engineer --- */
+        body.theme-engineer {
+            --bg-color: #1e1e1e;
+            --surface-color: #252526;
+            --border-color: #2d2d2d;
+            --accent-color: #007acc;
+            --text-color: #d4d4d4;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .code-font {
-            font-family: 'Fira Code', monospace;
+        /* --- Theme: Funky Vibrant Creator --- */
+        body.theme-creator {
+            --bg-color: #0c0817;
+            --surface-color: #16112c;
+            --border-color: #2b1f4e;
+            --accent-color: #ff3366;
+            --text-color: #f1edff;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 51, 102, 0.08) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 40%);
         }
 
-        /* VS Code Typography Syntax Classes */
-        .syntax-keyword { color: var(--vscode-keyword); font-weight: 600; }
-        .syntax-string { color: var(--vscode-string); }
-        .syntax-comment { color: var(--vscode-comment); font-style: italic; }
-        .syntax-number { color: var(--vscode-number); }
-        .syntax-class { color: var(--vscode-className); }
-
-        /* Navigation Bar As an Editor Tab Group Bar */
-        .navbar-vscode {
-            background-color: var(--vscode-sidebar);
-            border-bottom: 2px solid #2b2b2b;
-        }
-        .nav-tab-active {
-            background-color: var(--vscode-bg);
-            color: #fff !important;
-            border-top: 2px solid var(--vscode-accent);
-            padding: 0.75rem 1.25rem !important;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
-        /* Card System Designed as Code Panels */
-        .card-custom { 
-            border: 1px solid #2d2d2d; 
-            border-radius: 6px; 
-            background: var(--vscode-sidebar); 
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .card-custom:hover { 
-            border-color: var(--vscode-accent);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .creator-title-font { font-family: 'Space Grotesk', sans-serif; }
 
-        /* Timeline Node Box Remapped inside Work Carousel */
-        .experience-card-node {
+        .syntax-keyword { color: #569cd6; font-weight: 600; }
+        .syntax-string { color: #ce9178; }
+        .syntax-comment { color: #6a9955; font-style: italic; }
+        .syntax-class { color: #4ec9b0; }
+
+        /* Portal Selection Cards */
+        .portal-card {
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            background: var(--surface-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
             position: relative;
-            padding-left: 1.5rem;
-            border-left: 2px solid var(--vscode-accent);
+            overflow: hidden;
+        }
+        .portal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+        }
+        .portal-card-engineer:hover {
+            border-color: #007acc;
+            box-shadow: 0 16px 30px rgba(0, 122, 204, 0.25);
+        }
+        .portal-card-creator:hover {
+            border-color: #ff3366;
+            box-shadow: 0 16px 30px rgba(255, 51, 102, 0.25);
+        }
+
+        /* Generic Custom Cards */
+        .card-custom { 
+            border: 1px solid var(--border-color); 
+            border-radius: 10px; 
+            background: var(--surface-color); 
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-custom:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
 
         .tech-tag { 
-            background: #151515; 
+            background: #121214; 
             color: #9cdcfe; 
             font-family: 'Fira Code', monospace;
             font-size: 0.75rem; 
             padding: 0.25rem 0.6rem; 
             border-radius: 4px; 
-            border: 1px solid #2d2d2d;
+            border: 1px solid var(--border-color);
+        }
+        body.theme-creator .tech-tag {
+            color: #ffb86c;
+            background: #21183c;
+            border-color: #3f2b6e;
         }
 
         .network-link { 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            padding: 0.8rem 1rem; 
-            background: var(--vscode-bg); 
-            border-radius: 6px; 
+            padding: 0.85rem 1rem; 
+            background: var(--bg-color); 
+            border-radius: 8px; 
             text-decoration: none; 
-            color: var(--vscode-text); 
+            color: var(--text-color); 
             font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.85rem; 
             transition: all 0.2s ease; 
-            border: 1px solid #2d2d2d; 
+            border: 1px solid var(--border-color); 
         }
         .network-link:hover { 
-            background: #2a2a2a; 
+            background: #2a2a30; 
             color: #fff; 
-            border-color: var(--vscode-accent);
+            border-color: var(--accent-color);
         }
 
-        .btn-vscode-primary {
-            background-color: var(--vscode-accent);
+        .btn-theme-primary {
+            background-color: var(--accent-color);
             color: #fff;
             border: none;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .btn-vscode-primary:hover {
-            background-color: #0062a3;
-            color: #fff;
-        }
-
-        .btn-vscode-outline {
-            background-color: transparent;
-            color: var(--vscode-text);
-            border: 1px solid #3e3e3e;
-            border-radius: 4px;
-        }
-        .btn-vscode-outline:hover {
-            background-color: #2d2d2d;
-            color: #fff;
-            border-color: #555;
-        }
-
-        /* Compact Column Deck Carousel Settings */
-        .deck-carousel .carousel-control-prev, 
-        .deck-carousel .carousel-control-next {
-            width: 8%;
-            opacity: 0.5;
-        }
-        .deck-carousel .carousel-control-prev:hover, 
-        .deck-carousel .carousel-control-next:hover {
-            opacity: 1;
-        }
-        .deck-carousel .carousel-indicators {
-            bottom: -35px;
-        }
-        .deck-carousel .carousel-indicators [data-bs-target] {
-            background-color: var(--vscode-accent);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        /* Form styling and placeholder color overrides */
-        .form-control-vscode {
-            background-color: var(--vscode-bg);
-            border: 1px solid #3e3e3e;
-            color: #fff;
-        }
-        .form-control-vscode:focus {
-            background-color: var(--vscode-bg);
-            border-color: var(--vscode-accent);
-            color: #fff;
-            box-shadow: none;
-        }
-        .form-control-vscode::placeholder {
-            color: #858585 !important;
-            opacity: 1 !important;
-        }
-
-        /* Dynamic Deployment Grid & Injections Style Override */
-        .live-deployment-card {
-            background: var(--vscode-sidebar);
-            border: 1px solid #2d2d2d;
             border-radius: 6px;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: all 0.2s;
         }
-        .live-deployment-card:hover {
-            border-color: #28a745;
-            box-shadow: 0 6px 12px rgba(40,167,69,0.15);
+        .btn-theme-primary:hover {
+            opacity: 0.9;
+            color: #fff;
+            transform: translateY(-1px);
         }
 
-        /* Gamified Retro Cabinet Styling */
+        .btn-theme-outline {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .btn-theme-outline:hover {
+            background-color: var(--surface-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+
+        /* Mode Switcher Pill */
+        #mode-switch-pill {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+        }
+
         .arcade-cabinet {
             background: #111112;
             border: 2px dashed #3e3e42;
             border-radius: 6px;
             position: relative;
-            overflow: hidden;
         }
         .arcade-screen {
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
-            background-size: 100% 4px, 6px 100%;
+            background: #000;
             border: 1px solid #2d2d30;
             border-radius: 4px;
         }
-        .arcade-card {
-            background: #1a1a1c;
-            border-left: 3px solid var(--arcade-green);
-            transition: all 0.2s ease;
-        }
-        .arcade-card:hover {
-            background: #222225;
-            border-color: #fff;
-        }
-        .xp-bar {
-            height: 5px;
-            background-color: #2d2d30;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .xp-progress {
-            width: 25%;
-            height: 100%;
-            background-color: var(--arcade-green);
-            box-shadow: 0 0 6px var(--arcade-green);
-            transition: width 0.4s ease;
+        .xp-bar { height: 5px; background-color: #2d2d30; border-radius: 3px; }
+        .xp-progress { width: 25%; height: 100%; background-color: var(--arcade-green); box-shadow: 0 0 6px var(--arcade-green); }
+
+        .creator-badge {
+            background: linear-gradient(135deg, #ff3366, #ff6b6b);
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        hr { border-top: 1px solid #2d2d2d; opacity: 1; }
+        /* Mobile-Responsive Embed Framework */
+        .embed-card-wrapper {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .reel-frame {
+            width: 100%;
+            max-width: 350px;
+            height: 520px;
+            border: none;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .linkedin-frame {
+            width: 100%;
+            max-width: 504px;
+            height: 540px;
+            border: none;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        @media (max-width: 576px) {
+            #mode-switch-pill {
+                bottom: 16px;
+                right: 16px;
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem !important;
+            }
+            .reel-frame {
+                height: 480px;
+            }
+            .linkedin-frame {
+                height: 490px;
+            }
+        }
     </style>
 </head>
-<body>
+<body class="theme-engineer">
 
-    <!-- Editor Top Header Bar / Navigation -->
-    <nav class="navbar navbar-expand navbar-dark navbar-vscode p-0 sticky-top">
-        <div class="container-fluid px-3">
-            <div class="navbar-nav me-auto">
-                <span class="nav-link nav-tab-active"><i class="fab fa-html5 text-danger me-2"></i>portfolio.html</span>
-            </div>
-            <div class="d-flex gap-3 fs-6">
-                <a href="https://github.com/vimaltiwari2612" target="_blank" class="text-secondary"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/vimaltiwari2612/" target="_blank" class="text-secondary"><i class="fab fa-linkedin"></i></a>
-                <a href="https://medium.com/@vimaltiwari2612" target="_blank" class="text-secondary"><i class="fab fa-medium"></i></a>
-            </div>
-        </div>
-    </nav>
+    <!-- Global Floating Mode Switcher Button -->
+    <button id="mode-switch-pill" class="btn btn-theme-primary px-4 py-2 shadow-lg" onclick="showPortalSelection()">
+        <i class="fas fa-arrows-rotate me-2"></i>Switch Persona
+    </button>
 
-    <!-- Hero / Profile Header Section -->
-    <header class="py-5 my-md-4">
-        <div class="container">
-            <div class="row align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-8 text-center text-md-start mt-4 mt-md-0">
-                    <div class="code-font mb-2"><span class="syntax-keyword">const</span> engineer = <span class="syntax-class">VimalTiwari</span>;</div>
-                    <h1 class="display-4 fw-bold text-white mb-3" style="letter-spacing: -1px;">Hi, I'm Vimal</h1>
-                    <p class="lead mb-4 fs-4 text-secondary code-font" style="max-width: 650px; line-height: 1.6; color: #a5a5a5 !important;">
-                        Engineer by Day, Comedian Whole Day 🎤
-                    </p>
-                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start code-font">
-                        <a target="_blank" href="https://vimaltiwari2612.github.io/resume.html" class="btn btn-vscode-primary px-4 py-2">
-                            <i class="fas fa-file-code me-2"></i>view_resume.pdf
-                        </a>
-                        <a href="#contact" class="btn btn-vscode-outline px-4 py-2">get_in_touch()</a>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <img src="https://avatars.githubusercontent.com/u/22127564?v=4" class="rounded-3 shadow border border-secondary" alt="Vimal Tiwari Profile" style="width: 180px; height: 180px; object-fit: cover; filter: grayscale(15%);">
-                </div>
-            </div>
+    <!-- Header Section -->
+    <header class="py-5">
+        <div class="container text-center px-3">
+            <img src="https://avatars.githubusercontent.com/u/22127564?v=4" class="rounded-circle shadow mb-3 border border-2 border-secondary" alt="Vimal Tiwari" style="width: 130px; height: 130px; object-fit: cover;">
+            <div class="code-font mb-2 text-secondary small">&lt;VimalTiwari /&gt;</div>
+            <h1 class="display-4 fw-extrabold text-white mb-2" id="hero-title" style="letter-spacing: -1px;">Hi, I'm Vimal</h1>
+            <p class="lead fs-4 text-light fw-medium mb-4" id="hero-subtitle">
+                Engineer by Day, Comedian Whole Day 🎤
+            </p>
         </div>
     </header>
 
-    <!-- Work Experience Section Refactored as an IDE Tab Carousel Layout -->
-    <section class="py-5 border-top border-bottom" style="background-color: #1a1a1a;">
-        <div class="container" style="max-width: 750px;">
-            <div class="code-font mb-4 text-center"><span class="syntax-comment">// Output stream detailing historical engineering logs</span></div>
-            <h2 class="fw-bold mb-4 text-center text-white">Work Experience</h2>
-            
-            <div id="experienceDeckCarousel" class="carousel slide deck-carousel p-4 card-custom shadow-sm" data-bs-ride="carousel" data-bs-interval="8000">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="2"></button>
-                    <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="3"></button>
-                </div>
-
-                <div class="carousel-inner">
-                    <!-- Experience Slide 1 -->
-                    <div class="carousel-item active">
-                        <div class="experience-card-node p-2">
-                            <span class="syntax-keyword small code-font d-block mb-1">Oct 2021 – Present</span>
-                            <h4 class="fw-bold text-white mb-1">Google</h4>
-                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Application Engineer &mdash; Bengaluru, India</p>
-                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Engineering robust backend systems architectures and low-latency internal structures to support international server pipeline operations securely.</p>
+    <!-- SECTION 0: Portal Tiles Selection (Initial Landing View) -->
+    <section id="portal-selection" class="pb-5">
+        <div class="container" style="max-width: 900px;">
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Tile 1: Creator Side -->
+                <div class="col-12 col-md-6">
+                    <div class="portal-card portal-card-creator h-100 p-4 p-lg-5 text-center d-flex flex-column align-items-center justify-content-center" onclick="activateTrack('creator')">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 75px; height: 75px; background: rgba(255, 51, 102, 0.15); color: #ff3366;">
+                            <i class="fas fa-microphone-lines fa-2xl"></i>
                         </div>
-                    </div>
-
-                    <!-- Experience Slide 2 -->
-                    <div class="carousel-item">
-                        <div class="experience-card-node p-2">
-                            <span class="syntax-keyword small code-font d-block mb-1">Jan 2019 – Oct 2021</span>
-                            <h4 class="fw-bold text-white mb-1">Q2</h4>
-                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Senior Software Engineer &mdash; Bengaluru, India</p>
-                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Designed secure transactional pipeline clusters and cloud full-stack modules servicing remote enterprise online banking suites.</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience Slide 3 -->
-                    <div class="carousel-item">
-                        <div class="experience-card-node p-2">
-                            <span class="syntax-keyword small code-font d-block mb-1">Sep 2016 – Dec 2018</span>
-                            <h4 class="fw-bold text-white mb-1">Persistent Systems Ltd</h4>
-                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Engineer &mdash; Nagpur, India</p>
-                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Assembled metadata schema systems and business logic transformation processes working on distributed CRM platform layers.</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience Slide 4 -->
-                    <div class="carousel-item">
-                        <div class="experience-card-node p-2">
-                            <span class="syntax-keyword small code-font d-block mb-1">May 2015 – Jul 2015</span>
-                            <h4 class="fw-bold text-white mb-1">Samadhan WS</h4>
-                            <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Android Developer Intern &mdash; Indore, India</p>
-                            <p class="text-secondary small mb-0" style="line-height: 1.5;">Modified structural functional blocks across native mobile packages utilizing initial platform component environments.</p>
-                        </div>
+                        <h3 class="fw-bold text-white mb-2">Explore Creator Side</h3>
+                        <p class="text-secondary small mb-4">Corporate satire reels, viral LinkedIn updates, YouTube specials, and creative writing.</p>
+                        <span class="btn creator-badge px-4 py-2 rounded-pill mt-auto">Enter Creator Mode &rarr;</span>
                     </div>
                 </div>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                <button class="carousel-control-next" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                <!-- Tile 2: Engineer Side -->
+                <div class="col-12 col-md-6">
+                    <div class="portal-card portal-card-engineer h-100 p-4 p-lg-5 text-center d-flex flex-column align-items-center justify-content-center" onclick="activateTrack('engineer')">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 75px; height: 75px; background: rgba(0, 122, 204, 0.15); color: #007acc;">
+                            <i class="fas fa-code fa-2xl"></i>
+                        </div>
+                        <h3 class="fw-bold text-white mb-2">Explore Engineer Side</h3>
+                        <p class="text-secondary small mb-4">Distributed backend systems, technical architecture articles, resume, and open-source code.</p>
+                        <span class="btn px-4 py-2 rounded-pill mt-auto" style="background:#007acc; color:#fff;">Enter Engineer Mode &rarr;</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- UNIFIED BUILD DECKS: 1 Row with 3 Carousel Columns Layout -->
-    <section id="unified-creation-row" class="py-5" style="background-color: var(--vscode-bg);">
-        <div class="container-fluid px-md-5">
-            <div class="code-font mb-4 text-center text-lg-start"><span class="syntax-comment">// Multi-threaded carousel clusters initialization matrix</span></div>
-            
-            <div class="row g-4">
-                
-                <!-- COLUMN 1: Tech Projects & Creations -->
-                <div class="col-lg-4 d-flex flex-column">
-                    <div class="d-flex align-items-center gap-2 mb-3 px-1">
-                        <i class="fas fa-folder text-warning fs-5"></i>
-                        <h4 class="fw-bold text-white fs-5 mb-0">Tech Projects</h4>
-                    </div>
-                    
-                    <div id="projectsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="6000">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="0" class="active"></button>
-                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="2"></button>
-                        </div>
-                        
-                        <div class="carousel-inner h-100">
-                            <!-- Slide 1 -->
-                            <div class="carousel-item active h-100">
-                                <div class="d-flex flex-column h-100 justify-content-between p-1">
-                                    <div>
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="fw-bold text-white mb-0 code-font">codeParserEngine.java</h6>
-                                            <span class="badge bg-success bg-opacity-10 text-success small px-2 py-05 code-font" style="font-size:0.65rem;">Stable</span>
-                                        </div>
-                                        <p class="small text-secondary mb-3">Syntactical source code parser built to read Java structural blueprints and convert fields directly into standard UML layouts.</p>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">Java</span><span class="tech-tag">AST</span></div>
-                                        <a target="_blank" href="https://github.com/vimaltiwari2612/JavaCodeParserAndUMLCreator" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Slide 2 -->
-                            <div class="carousel-item h-100">
-                                <div class="d-flex flex-column h-100 justify-content-between p-1">
-                                    <div>
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="fw-bold text-white mb-0 code-font">metaQueryExtension.js</h6>
-                                            <span class="badge bg-warning bg-opacity-10 text-warning small px-2 py-05 code-font" style="font-size:0.65rem;">Active</span>
-                                        </div>
-                                        <p class="small text-secondary mb-3">Background browser processing extension optimized for asynchronous schema queries and direct real-time runtime SOQL executions.</p>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">JavaScript</span><span class="tech-tag">Chrome-API</span></div>
-                                        <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceChromeExtension" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Slide 3 -->
-                            <div class="carousel-item h-100">
-                                <div class="d-flex flex-column h-100 justify-content-between p-1">
-                                    <div>
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="fw-bold text-white mb-0 code-font">virtualClassroom.java</h6>
-                                            <span class="badge bg-info bg-opacity-10 text-info small px-2 py-05 code-font" style="font-size:0.65rem;">Core</span>
-                                        </div>
-                                        <p class="small text-secondary mb-3">Interactive portal core engineered to support real-time video frames, collaborative messages, and synchronized streaming relays.</p>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-flex flex-wrap gap-1 mb-3"><span class="tech-tag">Java</span><span class="tech-tag">WebSockets</span></div>
-                                        <a target="_blank" href="https://github.com/vimaltiwari2612/VirtualClassroom" class="text-decoration-none fw-semibold small code-font" style="color: #4fc1ff;">git_clone <i class="fas fa-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!-- ================================================================= -->
+    <!-- TRACK: CREATOR CONTENT                                            -->
+    <!-- ================================================================= -->
+    <div id="creator-track" style="display: none;">
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+        <!-- 1. Instagram Section (@corporateshinchan with Direct Responsive Iframes) -->
+        <section class="py-5 border-top border-bottom" style="background: rgba(0,0,0,0.25);">
+            <div class="container">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 gap-3">
+                    <div class="text-center text-md-start">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
+                            <i class="fab fa-instagram fs-3" style="color: #e1306c;"></i>
+                            <h2 class="fw-bold text-white fs-3 mb-0">Corporate Humor Reels</h2>
+                        </div>
+                        <p class="text-secondary mb-0 small">Corporate life satire, tech comedy, and relatable daily skits.</p>
                     </div>
+                    <a href="https://www.instagram.com/corporateshinchan" target="_blank" class="btn btn-outline-danger px-4 py-2 rounded-pill code-font fw-semibold">
+                        <i class="fab fa-instagram me-2"></i>@corporateshinchan
+                    </a>
                 </div>
 
-                <!-- COLUMN 2: Live Deployments Hub -->
-                <div class="col-lg-4 d-flex flex-column">
-                    <div class="d-flex align-items-center gap-2 mb-3 px-1">
-                        <i class="fas fa-globe text-success fs-5"></i>
-                        <h4 class="fw-bold text-white fs-5 mb-0">Live Deployments</h4>
-                    </div>
-
-                    <div id="deploymentsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="7000">
-                        <div id="deck-deployments-indicators" class="carousel-indicators"></div>
-
-                        <div id="deck-deployments-carousel-inner" class="carousel-inner h-100">
-                            <div class="text-center py-5 my-4 text-secondary code-font small">
-                                <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
-                                await stream_parsing...
-                            </div>
+                <div class="row g-4 justify-content-center">
+                    <!-- Reel 1: DdGVdHhtwOl -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="reel-frame"
+                                src="https://www.instagram.com/reel/DdGVdHhtwOl/embed" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                allowtransparency="true" 
+                                allow="encrypted-media"
+                                title="Instagram Reel 1">
+                            </iframe>
                         </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
                     </div>
-                </div>
-
-                <!-- COLUMN 3: 8-Bit Retro Game Series Carousel -->
-                <div class="col-lg-4 d-flex flex-column">
-                    <div class="d-flex align-items-center justify-content-between mb-3 px-1">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-gamepad text-danger fs-5"></i>
-                            <h4 class="fw-bold text-white fs-5 mb-0">8-Bit Retro Space</h4>
+                    <!-- Reel 2: DcVI96vNz8s -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="reel-frame"
+                                src="https://www.instagram.com/reel/DcVI96vNz8s/embed" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                allowtransparency="true" 
+                                allow="encrypted-media"
+                                title="Instagram Reel 2">
+                            </iframe>
                         </div>
-                        <div class="code-font text-warning small fw-bold" style="font-size: 0.75rem;">XP: <span id="deck-arcade-xp">150</span></div>
                     </div>
-
-                    <div class="arcade-cabinet p-3 flex-grow-1 d-flex flex-column">
-                        <div class="mb-2"><div class="xp-bar"><div id="deck-arcade-xp-fill" class="xp-progress"></div></div></div>
-                        
-                        <div id="arcadeDeckCarousel" class="carousel slide deck-carousel arcade-screen p-3 flex-grow-1" data-bs-ride="carousel" data-bs-interval="8000">
-                            <div id="deck-arcade-indicators" class="carousel-indicators"></div>
-
-                            <div id="deck-arcade-carousel-inner" class="carousel-inner h-100">
-                                <div class="text-center py-5 my-4 text-secondary code-font small">
-                                    <i class="fas fa-circle-notch fa-spin text-success me-2"></i>boot_rom...
-                                </div>
-                            </div>
-
-                            <button class="carousel-control-prev" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                    <!-- Reel 3: Dcko158NYRL -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="reel-frame"
+                                src="https://www.instagram.com/reel/Dcko158NYRL/embed" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                allowtransparency="true" 
+                                allow="encrypted-media"
+                                title="Instagram Reel 3">
+                            </iframe>
                         </div>
                     </div>
                 </div>
-
             </div>
+        </section>
 
-            <!-- Global Footer CTA Buttons -->
-            <div class="text-center mt-5 pt-2">
-                <a target="_blank" href="https://github.com/vimaltiwari2612" class="btn btn-vscode-outline px-4 py-2 code-font small">
-                    <i class="fab fa-github me-2"></i>open_github_repositories()
+        <!-- 2. LinkedIn Section (Responsive Iframes) -->
+        <section class="py-5">
+            <div class="container">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 gap-3">
+                    <div class="text-center text-md-start">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
+                            <i class="fab fa-linkedin text-primary fs-3"></i>
+                            <h2 class="fw-bold text-white fs-3 mb-0">Viral LinkedIn Posts</h2>
+                        </div>
+                        <p class="text-secondary mb-0 small">Reflections on corporate dynamics, software journeys, and humor.</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/vimaltiwari2612/" target="_blank" class="btn btn-outline-primary px-4 py-2 rounded-pill code-font fw-semibold">
+                        <i class="fab fa-linkedin me-2"></i>Visit LinkedIn Profile
+                    </a>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Post 1 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="linkedin-frame"
+                                src="https://www.linkedin.com/embed/feed/update/urn:li:share:7497869848937545729" 
+                                frameborder="0" 
+                                allowfullscreen="" 
+                                title="LinkedIn Post 1">
+                            </iframe>
+                        </div>
+                    </div>
+                    <!-- Post 2 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="linkedin-frame"
+                                src="https://www.linkedin.com/embed/feed/update/urn:li:share:7495333691607404544" 
+                                frameborder="0" 
+                                allowfullscreen="" 
+                                title="LinkedIn Post 2">
+                            </iframe>
+                        </div>
+                    </div>
+                    <!-- Post 3 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="embed-card-wrapper">
+                            <iframe 
+                                class="linkedin-frame"
+                                src="https://www.linkedin.com/embed/feed/update/urn:li:share:7493161491336937472" 
+                                frameborder="0" 
+                                allowfullscreen="" 
+                                title="LinkedIn Post 3">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. YouTube Section -->
+        <section class="py-5 border-top border-bottom" style="background: rgba(0,0,0,0.25);">
+            <div class="container">
+                <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
+                    <div class="text-danger rounded-3 d-inline-block"><i class="fab fa-youtube fa-2xl"></i></div>
+                    <div>
+                        <h2 class="fw-bold text-white fs-3 mb-0">YouTube Highlights</h2>
+                    </div>
+                </div>
+                
+                <div class="row g-4 justify-content-center mt-1">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
+                            <iframe src="https://www.youtube.com/embed/w-6PQJE6xeY" title="YouTube video 1" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
+                            <iframe src="https://www.youtube.com/embed/TYg3RcN0phw" title="YouTube video 2" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
+                            <iframe src="https://www.youtube.com/embed/M-1a_1pLHIY" title="YouTube video 3" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a target="_blank" href="https://www.youtube.com/@vimal_creator/videos" class="btn btn-danger px-4 py-2 code-font fw-bold rounded-pill shadow-sm">
+                        <i class="fab fa-youtube me-2"></i>Visit Channel Directory
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Words & Creative Articles (Only The Soulful Writeups) -->
+        <section class="py-5">
+            <div class="container" style="max-width: 650px;">
+                <h3 class="fw-bold text-white fs-4 mb-4 text-center"><i class="fas fa-pen-fancy text-danger me-2"></i>Creative Writing</h3>
+                <a target="_blank" href="https://www.instagram.com/thesoulfulwriteups" class="network-link p-3">
+                    <span class="fs-6"><i class="fab fa-instagram me-2 text-danger"></i>The Soulful Writeups</span>
+                    <i class="fas fa-arrow-up-right-from-square small opacity-75"></i>
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Side-by-Side Unified Links Grid -->
-    <section id="digital-presence" class="py-5 border-top border-bottom" style="background-color: var(--vscode-sidebar);">
-        <div class="container">
-            <div class="row g-4">
-                
-                <!-- Programming & Coding -->
-                <div id="programming" class="col-md-6">
-                    <div class="card h-100 card-custom p-4 shadow-sm border-0 bg-transparent d-flex flex-column">
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="text-primary rounded-3 d-inline-block"><i class="fas fa-terminal fa-xl"></i></div>
-                            <div>
-                                <h3 class="fw-bold text-white fs-5 mb-0">Programming & Coding</h3>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column gap-2 mt-auto">
-                            <a target="_blank" href="https://www.hackerrank.com/vimaltiwari2612" class="network-link">
-                                <span><i class="fab fa-hackerrank me-2 text-success"></i>HackerRank Matrix</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://app.codesignal.com/profile/vimal_tiwari" class="network-link">
-                                <span><i class="fas fa-laptop-code me-2 text-info"></i>CodeSignal Competency</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://www.salesforce.com/trailblazer/vimaltiwari" class="network-link">
-                                <span><i class="fas fa-cloud me-2 text-primary"></i>Salesforce Trailhead</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://github.com/vimaltiwari2612/Programming" class="network-link">
-                                <span><i class="fas fa-file-code me-2 text-warning"></i>Coding Solutions Matrix</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    </div>
 
-                <!-- Digital Content & Blogs -->
-                <div id="digital-content" class="col-md-6">
-                    <div class="card h-100 card-custom p-4 shadow-sm border-0 bg-transparent d-flex flex-column">
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="text-success rounded-3 d-inline-block"><i class="fas fa-book-open fa-xl"></i></div>
-                            <div>
-                                <h3 class="fw-bold text-white fs-5 mb-0">Digital Content & Blogs</h3>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column gap-2 mt-auto">
-                            <a target="_blank" href="https://medium.com/elevate-salesforce" class="network-link">
-                                <span><i class="fab fa-medium me-2"></i>Elevate Salesforce</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://github.com/vimaltiwari2612/SystemDesign" class="network-link">
-                                <span><i class="fas fa-sitemap me-2 text-secondary"></i>System Design Assets</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://medium.com/elevate-java" class="network-link">
-                                <span><i class="fab fa-medium me-2"></i>Elevate Java Knowledge</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                            <a target="_blank" href="https://www.instagram.com/thesoulfulwriteups" class="network-link">
-                                <span><i class="fab fa-instagram me-2 text-danger"></i>The Soulful Writeups</span><i class="fas fa-chevron-right small opacity-50"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- ================================================================= -->
+    <!-- TRACK: ENGINEER CONTENT                                           -->
+    <!-- ================================================================= -->
+    <div id="engineer-track" style="display: none;">
 
-            </div>
-        </div>
-    </section>
-
-    <!-- Full-Width YouTube Section -->
-    <section id="youtube-section" class="py-5" style="background-color: var(--vscode-bg);">
-        <div class="container">
-            <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
-                <div class="text-danger rounded-3 d-inline-block"><i class="fab fa-youtube fa-2xl"></i></div>
-                <div>
-                    <h2 class="fw-bold text-white fs-3 mb-0">Youtube</h2>
-                </div>
-            </div>
-            
-            <div class="row g-4 justify-content-center mt-2">
-                <div class="col-lg-4 col-md-6">
-                    <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/w-6PQJE6xeY" title="YouTube video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/TYg3RcN0phw" title="YouTube video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="ratio ratio-16x9 border border-dark rounded overflow-hidden shadow bg-black">
-                        <iframe src="https://www.youtube.com/embed/M-1a_1pLHIY" title="YouTube video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-5">
-                <a target="_blank" href="https://www.youtube.com/@vimal_creator/videos" class="btn btn-danger px-4 py-2 code-font fw-bold shadow-sm" style="border-radius: 4px; font-size: 0.85rem;">
-                    <i class="fab fa-youtube me-2"></i>open_channel_directory()
+        <!-- Resume & Contact Quick CTAs -->
+        <div class="container text-center mb-5 px-3">
+            <div class="d-flex flex-wrap gap-3 justify-content-center code-font">
+                <a target="_blank" href="https://vimaltiwari2612.github.io/resume.html" class="btn btn-theme-primary px-4 py-2">
+                    <i class="fas fa-file-code me-2"></i>view_resume.pdf
                 </a>
+                <a href="#contact" class="btn btn-theme-outline px-4 py-2">get_in_touch()</a>
             </div>
         </div>
-    </section>
 
-    <!-- Interactive Terminal Connection Section -->
-    <section id="contact" class="py-5 border-top border-bottom" style="background-color: var(--vscode-sidebar);">
-        <div class="container" style="max-width: 600px;">
-            <div class="code-font text-center mb-2"><span class="syntax-comment">/* Process connection listener */</span></div>
+        <!-- Work Experience Deck -->
+        <section class="py-5 border-top border-bottom" style="background-color: #1a1a1a;">
+            <div class="container px-3" style="max-width: 750px;">
+                <div class="code-font mb-2 text-center text-secondary small">// Output stream: engineering work history</div>
+                <h2 class="fw-bold mb-4 text-center text-white">Work Experience</h2>
+                
+                <div id="experienceDeckCarousel" class="carousel slide deck-carousel p-4 card-custom shadow-sm" data-bs-ride="carousel" data-bs-interval="8000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide-to="3"></button>
+                    </div>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="p-2 border-start border-2 border-primary ps-3">
+                                <span class="syntax-keyword small code-font d-block mb-1">Oct 2021 – Present</span>
+                                <h4 class="fw-bold text-white mb-1">Google</h4>
+                                <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Application Engineer &mdash; Bengaluru, India</p>
+                                <p class="text-secondary small mb-0">Engineering robust backend system architectures and low-latency internal structures to support international server pipeline operations securely.</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="p-2 border-start border-2 border-primary ps-3">
+                                <span class="syntax-keyword small code-font d-block mb-1">Jan 2019 – Oct 2021</span>
+                                <h4 class="fw-bold text-white mb-1">Q2</h4>
+                                <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Senior Software Engineer &mdash; Bengaluru, India</p>
+                                <p class="text-secondary small mb-0">Designed secure transactional pipeline clusters and cloud full-stack modules servicing remote enterprise online banking suites.</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="p-2 border-start border-2 border-primary ps-3">
+                                <span class="syntax-keyword small code-font d-block mb-1">Sep 2016 – Dec 2018</span>
+                                <h4 class="fw-bold text-white mb-1">Persistent Systems Ltd</h4>
+                                <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Software Engineer &mdash; Nagpur, India</p>
+                                <p class="text-secondary small mb-0">Assembled metadata schema systems and business logic transformation processes working on distributed CRM platform layers.</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="p-2 border-start border-2 border-primary ps-3">
+                                <span class="syntax-keyword small code-font d-block mb-1">May 2015 – Jul 2015</span>
+                                <h4 class="fw-bold text-white mb-1">Samadhan WS</h4>
+                                <p class="syntax-class fw-medium mb-3 code-font" style="font-size: 0.9rem;">Android Developer Intern &mdash; Indore, India</p>
+                                <p class="text-secondary small mb-0">Modified structural functional blocks across native mobile packages utilizing initial platform component environments.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#experienceDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Writing & Architecture Publications -->
+        <section class="py-5" style="background-color: var(--surface-color);">
+            <div class="container px-3">
+                <h4 class="fw-bold text-white mb-4 code-font"><i class="fas fa-book-bookmark text-success me-2"></i>Technical Blogs & System Design</h4>
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <a target="_blank" href="https://medium.com/elevate-salesforce" class="network-link">
+                            <span><i class="fab fa-medium me-2 text-success"></i>Elevate Salesforce</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a target="_blank" href="https://medium.com/elevate-java" class="network-link">
+                            <span><i class="fab fa-medium me-2 text-info"></i>Elevate Java Knowledge</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a target="_blank" href="https://github.com/vimaltiwari2612/SystemDesign" class="network-link">
+                            <span><i class="fas fa-sitemap me-2 text-secondary"></i>System Design Assets</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects, Live Deployments & Retro Game Series -->
+        <section class="py-5 border-top">
+            <div class="container-fluid px-3 px-md-5">
+                <div class="code-font mb-4 text-secondary small">// Multi-threaded carousel clusters matrix</div>
+                
+                <div class="row g-4">
+                    <!-- Tech Projects -->
+                    <div class="col-lg-4 col-12 d-flex flex-column">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-folder text-warning fs-5"></i>
+                            <h4 class="fw-bold text-white fs-5 mb-0">Tech Projects</h4>
+                        </div>
+                        <div id="projectsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="6000">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active h-100">
+                                    <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                        <div>
+                                            <h6 class="fw-bold text-white mb-1 code-font">codeParserEngine.java</h6>
+                                            <p class="small text-secondary mb-3">Syntactical Java parser converting OOP class structures directly into standard UML models.</p>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap gap-1 mb-2"><span class="tech-tag">Java</span><span class="tech-tag">AST</span></div>
+                                            <a target="_blank" href="https://github.com/vimaltiwari2612/JavaCodeParserAndUMLCreator" class="text-decoration-none small code-font text-info">git_clone &rarr;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                        <div>
+                                            <h6 class="fw-bold text-white mb-1 code-font">metaQueryExtension.js</h6>
+                                            <p class="small text-secondary mb-3">Background browser extension optimized for async SOQL queries and real-time runtime inspection.</p>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap gap-1 mb-2"><span class="tech-tag">JS</span><span class="tech-tag">WebExtensions</span></div>
+                                            <a target="_blank" href="https://github.com/vimaltiwari2612/SalesforceChromeExtension" class="text-decoration-none small code-font text-info">git_clone &rarr;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item h-100">
+                                    <div class="d-flex flex-column h-100 justify-content-between p-1">
+                                        <div>
+                                            <h6 class="fw-bold text-white mb-1 code-font">virtualClassroom.java</h6>
+                                            <p class="small text-secondary mb-3">Distributed collaborative portal core with live video frames and socket sync relays.</p>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-flex flex-wrap gap-1 mb-2"><span class="tech-tag">Java</span><span class="tech-tag">WebSockets</span></div>
+                                            <a target="_blank" href="https://github.com/vimaltiwari2612/VirtualClassroom" class="text-decoration-none small code-font text-info">git_clone &rarr;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#projectsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                        </div>
+                    </div>
+
+                    <!-- Live GitHub Deployments -->
+                    <div class="col-lg-4 col-12 d-flex flex-column">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-globe text-success fs-5"></i>
+                            <h4 class="fw-bold text-white fs-5 mb-0">Live Deployments</h4>
+                        </div>
+                        <div id="deploymentsDeckCarousel" class="carousel slide deck-carousel flex-grow-1 p-3 card-custom" data-bs-ride="carousel" data-bs-interval="7000">
+                            <div id="deck-deployments-indicators" class="carousel-indicators"></div>
+                            <div id="deck-deployments-carousel-inner" class="carousel-inner h-100">
+                                <div class="text-center py-5 text-secondary code-font small">
+                                    <div class="spinner-border spinner-border-sm text-success me-2"></div> fetching live streams...
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                        </div>
+                    </div>
+
+                    <!-- 8-Bit Retro Space -->
+                    <div class="col-lg-4 col-12 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fas fa-gamepad text-danger fs-5"></i>
+                                <h4 class="fw-bold text-white fs-5 mb-0">8-Bit Space</h4>
+                            </div>
+                            <div class="code-font text-warning small fw-bold">XP: <span id="deck-arcade-xp">150</span></div>
+                        </div>
+                        <div class="arcade-cabinet p-3 flex-grow-1 d-flex flex-column">
+                            <div class="mb-2"><div class="xp-bar"><div id="deck-arcade-xp-fill" class="xp-progress"></div></div></div>
+                            <div id="arcadeDeckCarousel" class="carousel slide deck-carousel arcade-screen p-3 flex-grow-1" data-bs-ride="carousel" data-bs-interval="8000">
+                                <div id="deck-arcade-indicators" class="carousel-indicators"></div>
+                                <div id="deck-arcade-carousel-inner" class="carousel-inner h-100">
+                                    <div class="text-center py-5 text-secondary code-font small"><i class="fas fa-circle-notch fa-spin text-success me-2"></i>boot_rom...</div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a target="_blank" href="https://github.com/vimaltiwari2612" class="btn btn-theme-outline px-4 py-2 code-font small">
+                        <i class="fab fa-github me-2"></i>open_github_repositories()
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Profiles Matrix -->
+        <section class="py-5 border-top" style="background-color: var(--surface-color);">
+            <div class="container px-3">
+                <h4 class="fw-bold text-white mb-4 code-font"><i class="fas fa-terminal text-primary me-2"></i>Coding Solutions & Profiles</h4>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <a target="_blank" href="https://www.hackerrank.com/vimaltiwari2612" class="network-link">
+                            <span><i class="fab fa-hackerrank me-2 text-success"></i>HackerRank</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <a target="_blank" href="https://app.codesignal.com/profile/vimal_tiwari" class="network-link">
+                            <span><i class="fas fa-laptop-code me-2 text-info"></i>CodeSignal</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <a target="_blank" href="https://www.salesforce.com/trailblazer/vimaltiwari" class="network-link">
+                            <span><i class="fas fa-cloud me-2 text-primary"></i>Trailhead</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <a target="_blank" href="https://github.com/vimaltiwari2612/Programming" class="network-link">
+                            <span><i class="fas fa-code me-2 text-warning"></i>Solutions Matrix</span><i class="fas fa-arrow-right small opacity-50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- COMMON: GET IN TOUCH SECTION (Visible on Both Tracks)             -->
+    <!-- ================================================================= -->
+    <section id="contact" class="py-5 border-top border-bottom" style="background-color: var(--surface-color);">
+        <div class="container px-3" style="max-width: 600px;">
+            <div class="code-font text-center mb-1 text-secondary small">// Let's collaborate</div>
             <h2 class="fw-bold text-center text-white mb-4">Get in Touch</h2>
             
             <div class="text-center mb-4">
-                <a href="https://topmate.io/vimaltiwari" target="_blank" class="btn btn-vscode-primary btn-lg w-100 py-2 code-font" style="max-width: 400px; font-size:0.95rem;">
-                    <i class="fas fa-handshake me-2"></i>topmate.io/vimaltiwari
+                <a href="https://topmate.io/vimaltiwari" target="_blank" class="btn btn-theme-primary btn-lg w-100 py-2 code-font" style="max-width: 400px; font-size: 0.95rem;">
+                    <i class="fas fa-handshake me-2"></i>Book a slot on Topmate
                 </a>
             </div>
 
-            <div class="p-4 rounded card-custom shadow-sm bg-black bg-opacity-20">
+            <div class="p-4 rounded card-custom shadow-sm bg-black bg-opacity-25">
                 <form method="post" action="https://formspree.io/vimaltiwari2612@gmail.com">
-                    <input type="hidden" name="_subject" value="Contact request from vimaltiwari2612.github.io" />
+                    <input type="hidden" name="_subject" value="Contact request from Portfolio" />
                     <div class="mb-3">
-                        <input type="email" name="_replyto" placeholder="Enter your email address..." class="form-control form-control-vscode py-2 code-font" required style="font-size:0.85rem;">
+                        <input type="email" name="_replyto" placeholder="Enter your email address..." class="form-control bg-dark border-secondary text-white py-2 code-font" required style="font-size:0.85rem;">
                     </div>
                     <div class="mb-3">
-                        <textarea name="message" placeholder="Type your message here..." rows="4" class="form-control form-control-vscode py-2 code-font" required style="font-size:0.85rem;"></textarea>
+                        <textarea name="message" placeholder="Type your message here..." rows="4" class="form-control bg-dark border-secondary text-white py-2 code-font" required style="font-size:0.85rem;"></textarea>
                     </div>
-                    <div class="form-group mb-0">
-                        <button type="submit" class="btn btn-vscode-primary w-100 py-2 code-font" style="font-size:0.9rem;">transmit_payload()</button>
-                    </div>
+                    <button type="submit" class="btn btn-theme-primary w-100 py-2 code-font" style="font-size:0.9rem;">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- IDE Footer Console Bar -->
-    <footer class="py-3 text-secondary small" style="background-color: var(--vscode-sidebar); border-color: #2b2b2b !important;">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 code-font" style="font-size: 0.8rem;">
-            <div><span class="text-success">&bull; Logged:</span> Vimal Tiwari Core Portfolio Stack</div>
-            <div class="d-flex gap-3 fs-6">
+    <!-- Global Footer -->
+    <footer class="py-4 small text-secondary" style="background-color: var(--surface-color);">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 code-font px-3">
+            <div>&copy; Vimal Tiwari &bull; Engineer by Day, Comedian Whole Day</div>
+            <div class="d-flex gap-3 fs-5">
                 <a href="https://github.com/vimaltiwari2612" target="_blank" class="text-secondary"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/vimaltiwari2612/" target="_blank" class="text-secondary"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/_vimaltiwari/" target="_blank" class="text-secondary"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/vimaltiwari2612/" target="_blank" class="text-secondary"><i class="fab fa-facebook"></i></a>
-                <a href="skype:vimaltiwari2612_1?call" class="text-secondary"><i class="fab fa-skype"></i></a>
+                <a href="https://www.instagram.com/corporateshinchan" target="_blank" class="text-secondary"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@vimal_creator/videos" target="_blank" class="text-secondary"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Dependency Scripts Layer -->
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
-    <script src="js/portfolio.js"></script>
 
-    <!-- Consolidated Parallel Multi-Carousel Async Script Engine -->
+    <!-- Interactive Track Routing & Data Engine -->
     <script>
+        function activateTrack(mode) {
+            const portalSection = document.getElementById("portal-selection");
+            const creatorTrack = document.getElementById("creator-track");
+            const engineerTrack = document.getElementById("engineer-track");
+            const switcherPill = document.getElementById("mode-switch-pill");
+            const body = document.body;
+
+            portalSection.style.display = "none";
+            switcherPill.style.display = "block";
+
+            if (mode === "creator") {
+                body.className = "theme-creator";
+                creatorTrack.style.display = "block";
+                engineerTrack.style.display = "none";
+                switcherPill.innerHTML = `<i class="fas fa-terminal me-2"></i>Switch to Engineer View`;
+            } else {
+                body.className = "theme-engineer";
+                engineerTrack.style.display = "block";
+                creatorTrack.style.display = "none";
+                switcherPill.innerHTML = `<i class="fas fa-microphone me-2"></i>Switch to Creator View`;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showPortalSelection() {
+            document.body.className = "theme-engineer";
+            document.getElementById("portal-selection").style.display = "block";
+            document.getElementById("creator-track").style.display = "none";
+            document.getElementById("engineer-track").style.display = "none";
+            document.getElementById("mode-switch-pill").style.display = "none";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live GitHub API integration
         document.addEventListener("DOMContentLoaded", function() {
             const username = "vimaltiwari2612";
-            
-            // UI Hook Bindings
             const deploymentsInner = document.getElementById("deck-deployments-carousel-inner");
             const deploymentsIndicators = document.getElementById("deck-deployments-indicators");
             const arcadeInner = document.getElementById("deck-arcade-carousel-inner");
@@ -615,118 +789,74 @@
             const xpCounter = document.getElementById("deck-arcade-xp");
             const xpBarFill = document.getElementById("deck-arcade-xp-fill");
 
-            // Gamified XP Matrix Interaction Handler
             window.triggerArcadeXpGain = function() {
                 let xp = parseInt(xpCounter.innerText) || 150;
                 if (xp < 1000) {
                     xp += 115;
-                    if(xp > 1000) xp = 1000;
+                    if (xp > 1000) xp = 1000;
                     xpCounter.innerText = xp;
                     xpBarFill.style.width = `${(xp / 1000) * 100}%`;
                 }
             };
 
-            // --- ENDPOINT MATRIX 1: 8bit-game-series Carousel Generation ---
-            const arcadeSearchUrl = `https://api.github.com/search/repositories?q=user:${username}+topic:8bit-game-series`;
-            fetch(arcadeSearchUrl)
-                .then(res => res.json())
+            // 8-bit games repo fetch
+            fetch(`https://api.github.com/search/repositories?q=user:${username}+topic:8bit-game-series`)
+                .then(r => r.json())
                 .then(data => {
                     const games = data.items || [];
-                    if(games.length === 0) {
-                        arcadeInner.innerHTML = `<div class="text-secondary code-font small text-center py-5">// Arcade buffer clear.</div>`;
-                        return;
-                    }
+                    if (!games.length) return;
                     arcadeInner.innerHTML = "";
                     arcadeIndicators.innerHTML = "";
-
                     games.forEach((game, idx) => {
-                        const activeClass = idx === 0 ? "active" : "";
-                        const liveUrl = `https://${username}.github.io/${game.name}/`;
+                        const active = idx === 0 ? "active" : "";
+                        const url = `https://${username}.github.io/${game.name}/`;
                         const cleanTitle = game.name.replace(/8bit-/i, '').replace(/-/g, ' ').toUpperCase();
-
-                        arcadeIndicators.insertAdjacentHTML("beforeend", 
-                            `<button type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide-to="${idx}" class="${activeClass}"></button>`
-                        );
-
-                        const slideHtml = `
-                            <div class="carousel-item ${activeClass} h-100">
+                        arcadeIndicators.insertAdjacentHTML("beforeend", `<button type="button" data-bs-target="#arcadeDeckCarousel" data-bs-slide-to="${idx}" class="${active}"></button>`);
+                        arcadeInner.insertAdjacentHTML("beforeend", `
+                            <div class="carousel-item ${active} h-100">
                                 <div class="d-flex flex-column h-100 justify-content-between p-1">
                                     <div>
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="code-font fw-bold mb-0" style="color:var(--arcade-green) !important;">[0${idx+1}] ${cleanTitle}</h6>
-                                            <span class="small text-success" style="font-size:0.7rem;"><i class="fas fa-gamepad me-1"></i>ROM</span>
-                                        </div>
-                                        <p class="text-secondary small mb-3" style="font-size:0.78rem; line-height:1.4;">
-                                            ${game.description || "Authentic retro assembly solution built with low-fidelity logic configurations."}
-                                        </p>
+                                        <h6 class="code-font fw-bold mb-1" style="color:var(--arcade-green);">[0${idx+1}] ${cleanTitle}</h6>
+                                        <p class="text-secondary small mb-3">${game.description || "Retro assembly game logic module."}</p>
                                     </div>
                                     <div class="mt-auto pt-2 border-top border-dark d-flex align-items-center justify-content-between">
-                                        <span class="tech-tag" style="border-color:var(--arcade-green); color:var(--arcade-green);">8BIT</span>
-                                        <a href="${liveUrl}" target="_blank" onclick="triggerArcadeXpGain()" class="btn btn-sm btn-outline-success code-font px-2 py-05" style="font-size:0.68rem; border-color:var(--arcade-green); color:var(--arcade-green);">
-                                            INSERT_COIN <i class="fas fa-play ms-1" style="font-size:0.55rem;"></i>
-                                        </a>
+                                        <span class="tech-tag">8BIT</span>
+                                        <a href="${url}" target="_blank" onclick="triggerArcadeXpGain()" class="btn btn-sm btn-outline-success code-font px-2 py-05" style="font-size:0.7rem;">PLAY <i class="fas fa-play ms-1"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        `;
-                        arcadeInner.insertAdjacentHTML("beforeend", slideHtml);
+                        `);
                     });
-                })
-                .catch(err => {
-                    console.error(err);
-                    arcadeInner.innerHTML = `<div class="text-danger code-font small text-center py-5">// Arcade boot failure.</div>`;
-                });
+                }).catch(() => {});
 
-            // --- ENDPOINT MATRIX 2: Live GitHub Pages Deployments Hub ---
+            // GitHub Pages deployments fetch
             fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`)
-                .then(res => res.json())
+                .then(r => r.json())
                 .then(repos => {
-                    const pagesRepos = repos.filter(repo => repo.has_pages && repo.name.toLowerCase() !== `${username}.github.io`);
-                    
-                    if(pagesRepos.length === 0) {
-                        deploymentsInner.innerHTML = `<div class="text-secondary code-font small text-center py-5">// Clear deployment registry.</div>`;
-                        return;
-                    }
+                    const pages = repos.filter(repo => repo.has_pages && repo.name.toLowerCase() !== `${username}.github.io`);
+                    if (!pages.length) return;
                     deploymentsInner.innerHTML = "";
                     deploymentsIndicators.innerHTML = "";
-
-                    pagesRepos.forEach((repo, idx) => {
-                        const activeClass = idx === 0 ? "active" : "";
-                        const deployUrl = `https://${username}.github.io/${repo.name}/`;
-                        const langTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : `<span class="tech-tag">Web</span>`;
-
-                        deploymentsIndicators.insertAdjacentHTML("beforeend", 
-                            `<button type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide-to="${idx}" class="${activeClass}"></button>`
-                        );
-
-                        const slideHtml = `
-                            <div class="carousel-item ${activeClass} h-100">
+                    pages.forEach((repo, idx) => {
+                        const active = idx === 0 ? "active" : "";
+                        const url = `https://${username}.github.io/${repo.name}/`;
+                        deploymentsIndicators.insertAdjacentHTML("beforeend", `<button type="button" data-bs-target="#deploymentsDeckCarousel" data-bs-slide-to="${idx}" class="${active}"></button>`);
+                        deploymentsInner.insertAdjacentHTML("beforeend", `
+                            <div class="carousel-item ${active} h-100">
                                 <div class="d-flex flex-column h-100 justify-content-between p-1">
                                     <div>
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="fw-bold text-white mb-0 text-truncate code-font" style="max-width:75%;" title="${repo.name}">${repo.name}</h6>
-                                            <span class="small text-success" style="font-size:0.7rem;"><i class="fas fa-check-circle me-1"></i>Active</span>
-                                        </div>
-                                        <p class="text-secondary small mb-3" style="font-size:0.78rem; line-height:1.4;">
-                                            ${repo.description || "Active interface instance built and targeted on deployment streams successfully."}
-                                        </p>
+                                        <h6 class="fw-bold text-white mb-1 code-font text-truncate" title="${repo.name}">${repo.name}</h6>
+                                        <p class="text-secondary small mb-3">${repo.description || "Active production deployment instance."}</p>
                                     </div>
                                     <div class="mt-auto pt-2 border-top border-dark d-flex align-items-center justify-content-between">
-                                        ${langTag}
-                                        <a href="${deployUrl}" target="_blank" class="text-decoration-none small code-font text-success fw-semibold" style="font-size:0.75rem;">
-                                            launch_app <i class="fas fa-external-link-alt ms-1 small"></i>
-                                        </a>
+                                        <span class="tech-tag">${repo.language || 'Web'}</span>
+                                        <a href="${url}" target="_blank" class="text-decoration-none small code-font text-success fw-semibold">launch_app <i class="fas fa-external-link-alt ms-1"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        `;
-                        deploymentsInner.insertAdjacentHTML("beforeend", slideHtml);
+                        `);
                     });
-                })
-                .catch(err => {
-                    console.error(err);
-                    deploymentsInner.innerHTML = `<div class="text-danger code-font small text-center py-5">// Stream mapping failure.</div>`;
-                });
+                }).catch(() => {});
         });
     </script>
 </body>
